@@ -29,5 +29,5 @@ Celray James CHAWANDA
 Chris GEORGE
 
 ## License
-This project is licensed under the MIT License. See also the [license](./LICENCE) file.
+This project is licensed under the MIT License. See also the [license](./LICENSE) file.
 
