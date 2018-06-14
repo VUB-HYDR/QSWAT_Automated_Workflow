@@ -23,7 +23,7 @@ Outlet			 = "drawoutlets.shp"  # IT SHOULD HAVE FIELDS AS IN EXAMPLE
 Precipitation	 = "pcpRobStation.txt"
 Temperature		 = "tmpRobStation.txt"
 Rel_Humidity	 = "rhumRobStation.txt"
-Solar_Radiation	 = ""
+Solar_Radiation	 = "solRobStation.txt"
 Wind			 = "windRobStation.txt"
 
 """---------------------------  Project Options  ---------------------"""
@@ -45,13 +45,13 @@ Slope_classes	     = "0, 10, 50, 9999"
 HRU_creation_method = 3
 
 # Thresholds (1 = Total Area , 2 = Percent)
-HRU_thresholds_type	 = 2
+HRU_thresholds_type	 = 1
 
 HRU_thres_Soil 		 = 10                # Only used if HRU_creation_method 5 is selected
 HRU_thres_LandUse 	 = 12               #         can be set to "" if 5 is not selected
 HRU_thres_Slope 	 = 7
 
-Target_Value         = 20               # used if HRU_creation_method 3 and 4 are selected
+Target_Value         = 10               # used if HRU_creation_method 3 and 4 are selected
 
 
 

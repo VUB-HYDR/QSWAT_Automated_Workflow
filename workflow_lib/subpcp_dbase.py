@@ -102,7 +102,7 @@ else:
         SubPcp_defaults["OrderID"] = Sub_OrderID
         SubPcp_defaults["TimeStep"] = 0
 
-        SubPcp.insert_row("SubPCP", SubPcp_defaults, True)
+        SubPcp.insert_row("SubPcp", SubPcp_defaults, True)
 
 #pcp.disconnect()
 #SubPcp.disconnect()
