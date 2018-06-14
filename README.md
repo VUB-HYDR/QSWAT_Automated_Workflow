@@ -21,6 +21,9 @@ This is the namelist where all settings for the configuration of the model are e
 ### 3. [workflow_lib](./workflow_lib)
 This directory contains all the modules for the  workflow
 
+### 4. [Data](./Data)
+This directory has an example dataset for testing 
+
 ## Versions
 Version 0.1.0 - June 2018
 
