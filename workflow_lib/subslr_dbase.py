@@ -28,6 +28,20 @@ else:
 
     slr = mdt.mdb_with_ops(variables.ProjMDB)
     slr.connect()
+    try:
+        slr.create_table("SubSlr", "ObjectID", "INTEGER")
+    except:
+        pass
+    try:
+        slr.add_field("SubSlr", "Subbasin", "INTEGER")
+        slr.add_field("SubSlr", "MinDist", "FLOAT")
+        slr.add_field("SubSlr", "MinRec", "INTEGER")
+        slr.add_field("SubSlr", "Station", "TEXT")
+        slr.add_field("SubSlr", "OrderID", "INTEGER")
+        slr.add_field("SubSlr", "TimeStep", "INTEGER")
+    except:
+        pass
+        
     slr.clear_table("slr")
 
     for i in range (1,len(slr_stations)):   # the square brackets are used to escape reserved column names
