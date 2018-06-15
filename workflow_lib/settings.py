@@ -4,9 +4,9 @@ Project_Name 	 = "working_example"
 
 """---------------------------  File Names  --------------------------"""
 # Raster files (Should be projected with the same projection)
-Topography		 = "dem"
-Soils		 	 = "soilmap"
-Land_Use		 = "roblandusenew"
+Topography		 = "dem.tif"
+Soils		 	 = "rob_soils.tif"
+Land_Use		 = "roblanduse.tif"
 #Irrigation		 = ""
 
 # LookUp Files
@@ -23,13 +23,13 @@ Outlet			 = "drawoutlets.shp"  # IT SHOULD HAVE FIELDS AS IN EXAMPLE
 Precipitation	 = "pcpRobStation.txt"
 Temperature		 = "tmpRobStation.txt"
 Rel_Humidity	 = "rhumRobStation.txt"
-Solar_Radiation	 = "solRobStation.txt"
+Solar_Radiation	 = ""
 Wind			 = "windRobStation.txt"
 
 """---------------------------  Project Options  ---------------------"""
 # Watershed Deliniation (1 = Cells)
 WS_thresholds_type	 = 1            
-WS_threshold 		 = 992
+WS_threshold 		 = 792
 OUT_Snap_threshold	 = 300 			# metres 
 Burn_in_shape        = ""           # leave as "" if none; note that the format should be as
                                             #              used for the GUI, else, it will be skipped
@@ -45,13 +45,13 @@ Slope_classes	     = "0, 10, 50, 9999"
 HRU_creation_method = 3
 
 # Thresholds (1 = Total Area , 2 = Percent)
-HRU_thresholds_type	 = 1
+HRU_thresholds_type	 = 2
 
 HRU_thres_Soil 		 = 10                # Only used if HRU_creation_method 5 is selected
 HRU_thres_LandUse 	 = 12               #         can be set to "" if 5 is not selected
 HRU_thres_Slope 	 = 7
 
-Target_Value         = 10               # used if HRU_creation_method 3 and 4 are selected
+Target_Value         = 20               # used if HRU_creation_method 3 and 4 are selected
 
 
 

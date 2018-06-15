@@ -1,3 +1,12 @@
+"""
+
+Author : Celray James CHAWANDA
+
+This is the main script for launching the SWAT model setup process
+
+"""
+
+
 import sys, os, shutil, shlex
 from settings import *
 from datetime import datetime

@@ -56,8 +56,10 @@ print "\t> Getting tiff from dem\t\t\t: " + settings.Topography
 cj.convert_raster(root + "/Data/" + settings.Topography, root + "/" + project_name + "/Source/dem.tif")
 
 print "\t> Getting landuse and soil maps..."
-# we copy geospatial info too
-cj.copytree(root + "/Data/" + settings.Soils, root + "/" + project_name + "/Source/soil/soilmap/")
+if os.path.isdir(os.path.join(root, "Data", settings.Soils)):
+    cj.copytree(os.path.join(root, "Data", settings.Soils), root + "/" + project_name + "/Source/soil/{0}/".format(settings.Soils))
+else:
+    cj.copy_file(os.path.join(root, "Data", settings.Soils), os.path.join(root, project_name, "Source", "soil", settings.Soils))
 
 if os.path.isdir(os.path.join(root, "Data", settings.Land_Use)):
     cj.copytree(os.path.join(root, "Data", settings.Land_Use), os.path.join(root, project_name, "Source", "crop", settings.Land_Use))
@@ -76,9 +78,9 @@ print "\t> Getting outlet shape file\t\t: {0}".format(settings.Outlet)
 outletshapefile = os.path.join(root, "Data", "shapes", settings.Outlet)
 
 if os.path.isfile(outletshapefile):
-    copyshape(outletshapefile, "drawoutlets", root + "/" + project_name + "/Watershed/Shapes/")
-    copyshape(outletshapefile, "drawoutlets_sel", root + "/" + project_name + "/Watershed/Shapes/")
-    copyshape(outletshapefile, "drawoutlets_sel_snap", root + "/" + project_name + "/Watershed/Shapes/")
+    copyshape(outletshapefile, "outlet", root + "/" + project_name + "/Watershed/Shapes/")
+    copyshape(outletshapefile, "outlet_sel", root + "/" + project_name + "/Watershed/Shapes/")
+    copyshape(outletshapefile, "outlet_sel_snap", root + "/" + project_name + "/Watershed/Shapes/")
 else: 
     print("\t! Error: either No outletshape file was specified, or it does not exist.")
 
@@ -233,7 +235,15 @@ else:
     new_pj_string = new_pj_string.replace('crop/landuse/hdr.adf', 'crop/' + str(settings.Land_Use))        
     new_pj_string = new_pj_string.replace('crop\\landuse\\hdr.adf', 'crop\\' + str(settings.Land_Use))        
 
+if os.path.isdir(root + "/" + project_name + "/Source/soil/" + settings.Soils):
+    new_pj_string = new_pj_string.replace('soil/soilmap/hdr.adf', 'soil/' + str(settings.Soils) + '/hdr.adf')
+    new_pj_string = new_pj_string.replace('soil\\soilmap\\hdr.adf', 'soil\\' + str(settings.Soils) + '\\hdr.adf')    
+else:
+    new_pj_string = new_pj_string.replace('soil/soilmap/hdr.adf', 'soil/' + str(settings.Soils))        
+    new_pj_string = new_pj_string.replace('soil\\soilmap\\hdr.adf', 'soil\\' + str(settings.Soils)) 
+
 new_pj_string = new_pj_string.replace('Landuses__Landuse', 'Landuses__' + str(settings.Land_Use).split(".")[0])
+new_pj_string = new_pj_string.replace('soilmap', '' + str(settings.Soils).split(".")[0])
 
 # set projection info
 new_pj_string = new_pj_string.replace('<proj4>default_proj4</proj4>', '<proj4>' + proj4 + '</proj4>')

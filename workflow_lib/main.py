@@ -4,6 +4,7 @@ import init_file as variables
 from shutil import copyfile
 import cj_function_lib as cj
 
+
 cwd = variables.path + "\\"
 
 os.chdir(variables.root)
