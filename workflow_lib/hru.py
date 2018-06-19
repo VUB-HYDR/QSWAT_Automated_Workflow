@@ -23,8 +23,8 @@ for hru_record in hru_table:
 
     # Parameters
     HRU_FR = hru_record.split(",")[6].strip('"')
-    SLSUBBSN = hru_record.split(",")[7].strip('"')
     HRU_SLP = hru_record.split(",")[8].strip('"')
+    SLSUBBSN = cj.get_slsbbsn(HRU_SLP)
     OV_N = hru_record.split(",")[9].strip('"')
     LAT_TTIME = hru_record.split(",")[10].strip('"')
     LAT_SED = hru_record.split(",")[11].strip('"')

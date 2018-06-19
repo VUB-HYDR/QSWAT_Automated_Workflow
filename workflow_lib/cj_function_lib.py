@@ -24,7 +24,27 @@ def get_raster_stats(raster_file):
     raster_stats = {"min": stats[0], "max": stats[1], "mean": stats[2], "std_dev": stats[3]}
     return raster_stats
 
-
+def get_slsbbsn(hru_slope):
+    hru_slope = float(hru_slope)
+    sl_sub_bsn = None
+    if hru_slope < 0.02:
+        sl_sub_bsn = 121.951
+    elif (hru_slope >= 0.02) and (hru_slope <  0.05):
+        sl_sub_bsn = 91.463
+    elif (hru_slope >= 0.05) and (hru_slope <  0.12):
+        sl_sub_bsn = 60.976
+    elif (hru_slope >= 0.12) and (hru_slope <  0.16):
+        sl_sub_bsn = 24.390
+    elif (hru_slope >= 0.16) and (hru_slope <  0.20):
+        sl_sub_bsn = 18.293
+    elif (hru_slope >= 0.20) and (hru_slope <  0.25):
+        sl_sub_bsn = 15.244
+    elif (hru_slope >= 0.25):
+        sl_sub_bsn = 9.146
+    else:
+        sl_sub_bsn = 50.000
+        
+    return sl_sub_bsn
 
 def get_extents(raster):
     src = gdal.Open(raster)
