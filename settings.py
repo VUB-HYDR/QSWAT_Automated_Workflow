@@ -19,7 +19,7 @@ WGEN_user		 = "WGEN_Robit.csv"
 # Shape Files
 Outlet			 = "drawoutlets.shp" # it should have same format as in the example
 
-# Weather forks
+# Weather stationinformation files
 Precipitation	 = "pcpRobStation.txt"
 Temperature		 = "tmpRobStation.txt"
 Rel_Humidity	 = "rhumRobStation.txt"

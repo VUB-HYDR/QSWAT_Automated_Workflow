@@ -45,5 +45,7 @@ time_end = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 print("\n\nFrom : " + time_begin)
 print("To   : " + time_end)
 
-with open("run_time.txt", "w") as f:
+with open(home_dir + "/run_time.txt", "w") as f:
     f.write("Begin: " + time_begin + "\nEnd : " + time_end)
+
+raw_input("\n\npress ENTER to exit...")
