@@ -1,4 +1,4 @@
-# 2018_Chawanda_etal_EMS
+# QSWAT_Automated_Workflow v1.5
 
 Automated workflow for setting up the SWAT Model presented in Chawanda et al., 2018 EMS. 
 
