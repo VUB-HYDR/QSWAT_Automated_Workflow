@@ -4,6 +4,7 @@ import os.path
 
 import cj_function_lib as cj
 import init_file as variables
+import settings
 import mdbtools as mdt
 
 #print variables.ProjMDB
@@ -120,8 +121,13 @@ SWAT_Vers = "QSWAT Workflow v1.5"
 
 
 # Parameters
-NBYR = cio_table[0].split(",")[1]
-IYR = cio_table[0].split(",")[2]
+if settings.Model_Run_period.replace(" ","") != "":
+    NBYR    = int(settings.Model_Run_period.replace(" ","").split("-")[1]) - int(settings.Model_Run_period.replace(" ","").split("-")[0])
+    IYR     = int(settings.Model_Run_period.replace(" ","").split("-")[0])
+else:
+    NBYR    = cio_table[0].split(",")[1]
+    IYR     = cio_table[0].split(",")[2]
+
 IDAF = cio_table[0].split(",")[3]
 IDAL = cio_table[0].split(",")[4]
 IGEN = cio_table[0].split(",")[5]
@@ -152,7 +158,10 @@ ISPROJ = cio_table[0].split(",")[29]
 ICLB = cio_table[0].split(",")[30]
 #IPRINT = cio_table[0].split(",")[31]
 IPRINT = '0'
-NYSKIP = cio_table[0].split(",")[32]
+if settings.Warm_up_period == "":
+    NYSKIP = cio_table[0].split(",")[32]
+else:
+    NYSKIP = settings.Warm_up_period
 ILOG = cio_table[0].split(",")[33]
 IPRP = cio_table[0].split(",")[34]
 IPRS = cio_table[0].split(",")[35]
@@ -168,8 +177,6 @@ ITEMP = cio_table[0].split(",")[44]
 IMGT = cio_table[0].split(",")[45]
 IWTR = cio_table[0].split(",")[46]
 ICALEN = cio_table[0].split(",")[47]
-
-
 
 # Building String
 cio_file = "Master Watershed File: file.cio" + \

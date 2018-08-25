@@ -9,7 +9,6 @@ sys.path.insert(0, root)
 #root = root[0:-1]
 import settings
 
-
 def _removeNonAscii(s): return "".join(i for i in s if ord(i)<128)
 
 def copyshape(infile, outbase, outdir):
@@ -22,7 +21,6 @@ def copyshape(infile, outbase, outdir):
 print "____________________________________________________________________________\nPreparing Project...\n"
 
 project_name = settings.Project_Name
-
 cj.create_directory(os.path.join(root, project_name))
 
 cj.create_directory(os.path.join(root, project_name, "Scenarios", "Default", "TablesIn"))
@@ -36,7 +34,6 @@ cj.create_directory(os.path.join(root, project_name, "Watershed", "Tables"))
 cj.create_directory(os.path.join(root, project_name, "Watershed", "temp"))
 cj.create_directory(os.path.join(root, project_name, "Watershed", "Text"))
 cj.create_directory(os.path.join(root, project_name, "Weather"))
-
 
 # Here we copy database files
 print "\t> Getting Databases..."
@@ -73,7 +70,6 @@ if not settings.Burn_in_shape == "":
     else: 
         print("\t! Error: the specified burn-in file was not found, check that it exists and try again.")
 
-
 print "\t> Getting outlet shape file\t\t: {0}".format(settings.Outlet)
 outletshapefile = os.path.join(root, "Data", "shapes", settings.Outlet)
 
@@ -97,7 +93,6 @@ prj_dbase = mdt.mdb_with_ops(os.path.join(root, project_name, project_name + ".m
 ref_dbase = mdt.mdb_with_ops(os.path.join(root, project_name, "QSWATRef2012.mdb"))
 
 # how to remove existing table if any?
-
 try:
    # prj_dbase.delete_table("landuse_lookup")
     prj_dbase.delete_table("hru")
@@ -164,7 +159,6 @@ for line in WGEN_data:
             print "\t\t! Your WGEN_user table may have one or more non-ascii characters: convert it at http://utils.paranoiaworks.org/diacriticsremover/"
     ref_dbase.insert_row("WGEN_user", wgen_user, True)  
 
-
 for line in usersoil_data:
     if line.split(",")[1] == 'MUID':
         continue
@@ -185,6 +179,8 @@ xmin, ymax, xmax, ymin = cj.get_extents(root + "/" + project_name + "/Source/dem
 epsg_code, srs_id, prj_name = cj.get_auth(root + "/" + project_name + "/Source/dem.tif")
 soil_epsg_code, soil_srs_id, soil_prj_name = cj.get_auth(os.path.join(root, project_name, "Source", "crop", settings.Land_Use))
 
+cj.write_to("epsg_code.tmp~", "{0}".format(epsg_code))
+
 projlist = proj4.split(" ")
 
 proj4_dic = {}
@@ -194,7 +190,6 @@ for item in projlist:
     else:
         proj4_dic[item.split("=")[0]] = item.split("=")[1]
 
-		
 ## Here we replace the text inside the project file
 project_file_list = cj.read_from(root + "/workflow_lib/template.qgs")
 project_file_string = ""
@@ -225,7 +220,8 @@ if settings.HRU_creation_method == 5:
 if settings.HRU_thresholds_type == 1:
     new_pj_string = new_pj_string.replace('<isArea type="int">0</isArea>', '<isArea type="int">1</isArea>')
 if not settings.Burn_in_shape == "":
-    new_pj_string = new_pj_string.replace('<burn type="QString"></burn>', '<burn type="QString">Source\\' + settings.Burn_in_shape + '</burn>')
+    pass
+    #new_pj_string = new_pj_string.replace('<burn type="QString"></burn>', '<burn type="QString">Source\\' + settings.Burn_in_shape + '</burn>')
 
 new_pj_string = new_pj_string.replace('Landuses (Landuse)', 'Landuses (' + str(settings.Land_Use.split(".")[0]) + ')')
 if os.path.isdir(root + "/" + project_name + "/Source/crop/" + settings.Land_Use):

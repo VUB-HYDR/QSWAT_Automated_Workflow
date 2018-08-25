@@ -1,9 +1,9 @@
-import os
+import os, osr
 import sys
 import init_file as variables
 from shutil import copyfile
 import cj_function_lib as cj
-
+import settings
 
 cwd = variables.path + "\\"
 
@@ -11,6 +11,14 @@ os.chdir(variables.root)
 copyfile(cwd + "runQSWATBatch.bat", variables.root + "\\runQSWATBatch.bat")
 os.system("runQSWATBatch.bat " + variables.ProjName + ".qgs")
 
+# set projections for shape files in "...\Project Name\Watershed\Shapes\"
+prj_ = osr.SpatialReference()
+prj_.ImportFromEPSG(int(cj.read_from("workflow_lib/epsg_code.tmp~")[0]))
+prj_wkt = prj_.ExportToWkt()
+cj.write_to("{0}/Watershed/Shapes/subs1.prj".format(settings.Project_Name), prj_wkt)
+cj.write_to("{0}/Watershed/Shapes/riv1.prj".format(settings.Project_Name), prj_wkt)
+
+# work on the databases
 os.chdir(variables.path)
 
 print ''
@@ -51,6 +59,7 @@ cj.update_status("Working on the Project Database : Finished...", logging = vari
 
 print ''
 
+# write files to txtinout
 cj.update_status("Writing files : chm", logging = variables.logging)
 try:
     execfile(cwd + "chm.py")
@@ -111,6 +120,8 @@ execfile(cwd + "plant.py")
 cj.update_status("Writing files : file.cio", logging = variables.logging)
 execfile(cwd + "cio.py")
 cj.update_status("Writing files : Finnished...\n", logging = variables.logging)
+execfile(cwd + "master_table_db.py") # enable buttons in interface
+execfile(cwd + "put_params.py")
 copyfile(cwd + "swat_64rel.exe", variables.DefaultSimDir + "\\TxtInOut\\swat_64rel.exe")
 
 os.chdir(variables.DefaultSimDir + "TxtInOut")

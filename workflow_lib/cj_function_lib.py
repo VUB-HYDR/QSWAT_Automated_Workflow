@@ -358,7 +358,7 @@ def update_status(message, logging = False):
     if logging:
         print(message)
     else:
-        sys.stdout.write("\r                                                               \t\t\t\t\t\t\t\t")
+        sys.stdout.write("\r\t\t\t\t\t\t\t\t")
         sys.stdout.flush()
         sys.stdout.write("\r" + message)
         sys.stdout.flush()

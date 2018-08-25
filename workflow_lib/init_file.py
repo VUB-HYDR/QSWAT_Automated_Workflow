@@ -3,6 +3,7 @@ Author: Celray James CHAWANDA, VUB
 """
 import os,sys
 import cj_function_lib as cj
+import settings
 
 path = os.path.dirname(cj.__file__)
 root = path.replace("workflow_lib", "")
@@ -11,14 +12,11 @@ sys.path.append(root)
 import settings
 
 ProjList = cj.list_files_from(root, "qgs")
-if len(ProjList)>1:
-    print ProjList
-    print("Error: There are more than one project files in the directory, please make sure you only keep the one you want to work on.")
-    sys.exit()
+
 if len(ProjList)==0:
     print("Error: No project File Prepared")
     sys.exit()
-ProjName = ProjList[0].split("\\")[-1].replace(".qgs","")
+ProjName = settings.Project_Name
 
 #Directories
 ProjDir = root + ProjName + "\\"

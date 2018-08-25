@@ -12,7 +12,7 @@ install pyodbc via `pip install pyodbc`
 ## For users
 This repository includes the code for the wrapper presented in this paper. The wrapper runs in 32 bit version of python 2.7.
 
-### 1. [runQGISWorkflow.py](./runQGISWorkflow.py) 
+### 1. [runQSWAT.py](./runQSWAT.py) 
 This is the file used to launch the model set up process
 
 ### 2. [settings.py](./settings.py)
@@ -25,7 +25,7 @@ This directory contains all the modules for the  workflow
 This directory has an example dataset for testing 
 
 ## Versions
-Version 0.1.0 - June 2018
+Version 1.5.0 - August 2018
 
 ## Authors
 Celray James CHAWANDA   

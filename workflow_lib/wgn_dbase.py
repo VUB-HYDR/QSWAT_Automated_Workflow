@@ -4,16 +4,42 @@ import sys
 import cj_function_lib as cj
 import init_file as variables
 import mdbtools as mdt
+import ogr, osr
 
-def get_distance(x1, y1, z1, x2, y2, z2):
-    """The distance units must be the same, decimal degrees meant converting elevation
-    to decimal degrees as wel, but that messed up the whole assignment of  stations, as such, only 'lat' and 'lon' are used"""
+def transform_point_coordinates(point_x, point_y, output_epsg, input_epsg = 4326):
+    """
+    function to transform the ponts to projection of the dem before calculating distance
+    """
+    # create a geometry from coordinates
+    point = ogr.Geometry(ogr.wkbPoint)
+    point.AddPoint(point_x, point_y)
+
+    # create coordinate transformation
+    inSpatialRef = osr.SpatialReference()
+    inSpatialRef.ImportFromEPSG(input_epsg)
+
+    outSpatialRef = osr.SpatialReference()
+    outSpatialRef.ImportFromEPSG(output_epsg)
+
+    coordTransform = osr.CoordinateTransformation(inSpatialRef, outSpatialRef)
+    # transform point
+    point.Transform(coordTransform)
+    return point.GetX(), point.GetY()
+
+def get_distance(x1, y1, z1, x2, y2, z2, epsg_):
+    """
+    The distance units must be the same, elevation is not used and can be removed from arguments
+    """
+    x2_, y2_ = transform_point_coordinates(x2, y2, epsg_)
+    x1_, y1_ = transform_point_coordinates(x1, y1, epsg_)
+    #distance = ((x2_ - x1_)**2 + (y2_ - y1_)**2)**0.5
     distance = ((x2 - x1)**2 + (y2 - y1)**2)**0.5
-#    distance = ((x2 - x1)**2 + (y2 - y1)**2 + (z2 - z1)**2)**0.5
     return distance
 
 #print variables.ProjMDB
 #print variables.QSWAT_MDB
+
+transform_epsg = int(cj.read_from("epsg_code.tmp~")[0])
 
 subbasins = cj.extract_table_from_mdb(variables.ProjMDB, 'Watershed', variables.path + "\\watershed.tmp~")
 wgnrgn = cj.extract_table_from_mdb(variables.QSWAT_MDB, 'wgnrng', variables.path + "\\wgnrgn.tmp~")
@@ -68,7 +94,7 @@ for subbasin in subbasins:    # getting field values from from watershed table
             print "Error Reading from WGEN_user table: Check and try again"
             sys.exit()
 
-        total_distance = get_distance(gen_station_lat, gen_station_lon, gen_st_elev, current_lat, current_lon, current_elev)
+        total_distance = get_distance(gen_station_lat, gen_station_lon, gen_st_elev, current_lat, current_lon, current_elev, transform_epsg)
         #if int(subbasin.split(",")[3]) == 10:
         #    print str(total_distance) + " --> " + (user_gen.split(",")[1])
         if total_distance in distances_only_list:

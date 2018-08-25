@@ -63,7 +63,7 @@ for hru in hrus:    # getting field values from from hrus table
             mgt2_defaults["HUSC"] = op_group.split(",")[10]
             mgt2_defaults["MGT_OP"] = op_group.split(",")[11]
             mgt2_defaults["HEATUNITS"] = op_group.split(",")[12]
-            mgt2_defaults["PLANT_ID"] = op_group.split(",")[13]
+            #mgt2_defaults["PLANT_ID"] = op_group.split(",")[13]
             mgt2_defaults["CURYR_MAT"] = op_group.split(",")[14]
             mgt2_defaults["LAI_INIT"] = op_group.split(",")[15]
             mgt2_defaults["BIO_INIT"] = op_group.split(",")[16]
