@@ -1,3 +1,11 @@
+"""
+Author      : Celray James CHAWANDA (celray.chawanda@outlook.com)
+Institution : Vrije Universiteit Brussel (VUB)
+
+This script writes the bsn file
+"""
+
+
 import init_file as variables
 import cj_function_lib as cj
 from datetime import datetime
@@ -9,7 +17,7 @@ now = datetime.now()
 
 DateAndTime = str(now.month) + "/" + str(now.day) + "/" + \
     str(now.year) + " " + str(now.time()).split(".")[0]
-SWAT_Vers = "QSWAT Workflow v1.5"
+SWAT_Vers = "QSWAT Workflow v1.5.2"
 
 # Parameters
 SFTMP = bsn_params[1].strip('"')

@@ -9,7 +9,7 @@ now = datetime.now()
 
 DateAndTime = str(now.month) + "/" + str(now.day) + "/" + \
     str(now.year) + " " + str(now.time()).split(".")[0]
-SWAT_Vers = "QSWAT Workflow v1.5"
+SWAT_Vers = "QSWAT Workflow v1.5.2"
 
 for hru_record in swq_table:
 

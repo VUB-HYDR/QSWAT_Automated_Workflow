@@ -3,7 +3,7 @@ import sys
 import init_file as variables
 from shutil import copyfile
 import cj_function_lib as cj
-import settings
+import namelist
 
 cwd = variables.path + "\\"
 
@@ -15,8 +15,8 @@ os.system("runQSWATBatch.bat " + variables.ProjName + ".qgs")
 prj_ = osr.SpatialReference()
 prj_.ImportFromEPSG(int(cj.read_from("workflow_lib/epsg_code.tmp~")[0]))
 prj_wkt = prj_.ExportToWkt()
-cj.write_to("{0}/Watershed/Shapes/subs1.prj".format(settings.Project_Name), prj_wkt)
-cj.write_to("{0}/Watershed/Shapes/riv1.prj".format(settings.Project_Name), prj_wkt)
+cj.write_to("{0}/Watershed/Shapes/subs1.prj".format(namelist.Project_Name), prj_wkt)
+cj.write_to("{0}/Watershed/Shapes/riv1.prj".format(namelist.Project_Name), prj_wkt)
 
 # work on the databases
 os.chdir(variables.path)
@@ -26,6 +26,8 @@ cj.update_status("Working on the Project Database : chm", logging = variables.lo
 execfile(cwd + "chm_dbase.py")
 cj.update_status("Working on the Project Database : gw", logging = variables.logging)
 execfile(cwd + "gw_dbase.py")
+cj.update_status("Working on the Project Database : bsn", logging = variables.logging)
+execfile(cwd + "bsn_dbase.py")
 cj.update_status("Working on the Project Database : hru", logging = variables.logging)
 execfile(cwd + "hru_dbase.py")
 cj.update_status("Working on the Project Database : mgt", logging = variables.logging)
@@ -45,7 +47,7 @@ execfile(cwd + "subpcp_dbase.py")
 execfile(cwd + "subslr_dbase.py")
 execfile(cwd + "subtmp_dbase.py")
 execfile(cwd + "subwnd_dbase.py")
-cj.update_status("Working on the Project Database : sub", logging = variables.logging)
+cj.update_status("Working on the Project Database : sub          ", logging = variables.logging)
 execfile(cwd + "sub_dbase.py")
 cj.update_status("Working on the Project Database : swq", logging = variables.logging)
 execfile(cwd + "swq_dbase.py")
@@ -66,7 +68,7 @@ try:
 except IOError:
     print("\n\t> could not write files to TxtInOut, make sure that 'QSWAT completed ok'")
     sys.exit()
-cj.update_status("Writing files : gw", logging = variables.logging)
+cj.update_status("Writing files : gw        ", logging = variables.logging)
 execfile(cwd + "gw.py")
 cj.update_status("Writing files : hru", logging = variables.logging)
 execfile(cwd + "hru.py")
@@ -105,7 +107,7 @@ execfile(cwd + "slr.py")
 
 cj.update_status("Writing files : ATMO, fig", logging = variables.logging)
 execfile(cwd + "fig_ATMO.py")
-cj.update_status("Writing files : fert", logging = variables.logging)
+cj.update_status("Writing files : fert        ", logging = variables.logging)
 execfile(cwd + "fert.py")
 cj.update_status("Writing files : till", logging = variables.logging)
 execfile(cwd + "till.py")

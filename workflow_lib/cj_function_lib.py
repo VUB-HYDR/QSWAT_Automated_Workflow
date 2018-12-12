@@ -150,7 +150,10 @@ def copy_file(original_file_path, destination):
         delete_file(destination)
     if not os.path.isdir(os.path.dirname(destination)): 
         os.makedirs(os.path.dirname(destination))
-    shutil.copy(original_file_path, destination)
+    try:
+        shutil.copy(original_file_path, destination)
+    except:
+        raise
 
 def get_days_in_year(year):
     days_ = (datetime.date(year + 1, 1, 1) - datetime.date(year, 1, 1)).days

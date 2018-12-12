@@ -7,7 +7,7 @@ root = path.replace("workflow_lib", "")#[0:-1]
 sys.path.insert(0, root)
 
 #root = root[0:-1]
-import settings
+import namelist
 
 def _removeNonAscii(s): return "".join(i for i in s if ord(i)<128)
 
@@ -20,7 +20,7 @@ def copyshape(infile, outbase, outdir):
 
 print "____________________________________________________________________________\nPreparing Project...\n"
 
-project_name = settings.Project_Name
+project_name = namelist.Project_Name
 cj.create_directory(os.path.join(root, project_name))
 
 cj.create_directory(os.path.join(root, project_name, "Scenarios", "Default", "TablesIn"))
@@ -48,30 +48,30 @@ with zipfile.ZipFile(root + "/workflow_lib/placeholdingtiffs.zip","r") as zip_re
 with zipfile.ZipFile(root + "/workflow_lib/placeholdingshapes.zip","r") as zip_ref:
     zip_ref.extractall(root + "/" + project_name + "/Watershed/Shapes/")
 
-print "\t> Getting tiff from dem\t\t\t: " + settings.Topography
+print "\t> Getting tiff from dem\t\t\t: " + namelist.Topography
 # copy dem as tiff 
-cj.convert_raster(root + "/Data/" + settings.Topography, root + "/" + project_name + "/Source/dem.tif")
+cj.convert_raster(root + "/Data/" + namelist.Topography, root + "/" + project_name + "/Source/dem.tif")
 
 print "\t> Getting landuse and soil maps..."
-if os.path.isdir(os.path.join(root, "Data", settings.Soils)):
-    cj.copytree(os.path.join(root, "Data", settings.Soils), root + "/" + project_name + "/Source/soil/{0}/".format(settings.Soils))
+if os.path.isdir(os.path.join(root, "Data", namelist.Soils)):
+    cj.copytree(os.path.join(root, "Data", namelist.Soils), root + "/" + project_name + "/Source/soil/{0}/".format(namelist.Soils))
 else:
-    cj.copy_file(os.path.join(root, "Data", settings.Soils), os.path.join(root, project_name, "Source", "soil", settings.Soils))
+    cj.copy_file(os.path.join(root, "Data", namelist.Soils), os.path.join(root, project_name, "Source", "soil", namelist.Soils))
 
-if os.path.isdir(os.path.join(root, "Data", settings.Land_Use)):
-    cj.copytree(os.path.join(root, "Data", settings.Land_Use), os.path.join(root, project_name, "Source", "crop", settings.Land_Use))
+if os.path.isdir(os.path.join(root, "Data", namelist.Land_Use)):
+    cj.copytree(os.path.join(root, "Data", namelist.Land_Use), os.path.join(root, project_name, "Source", "crop", namelist.Land_Use))
 else:
-    cj.copy_file(os.path.join(root, "Data", settings.Land_Use), os.path.join(root, project_name, "Source", "crop", settings.Land_Use))
+    cj.copy_file(os.path.join(root, "Data", namelist.Land_Use), os.path.join(root, project_name, "Source", "crop", namelist.Land_Use))
 
-if not settings.Burn_in_shape == "":
-    burn_in_shape = root + "/Data/shapes/" + settings.Burn_in_shape
+if not namelist.Burn_in_shape == "":
+    burn_in_shape = root + "/Data/shapes/" + namelist.Burn_in_shape
     if os.path.isfile(burn_in_shape):
-        copyshape(burn_in_shape, settings.Burn_in_shape[0:-4], root + "/" + project_name + "/Source/")
+        copyshape(burn_in_shape, namelist.Burn_in_shape[0:-4], root + "/" + project_name + "/Source/")
     else: 
         print("\t! Error: the specified burn-in file was not found, check that it exists and try again.")
 
-print "\t> Getting outlet shape file\t\t: {0}".format(settings.Outlet)
-outletshapefile = os.path.join(root, "Data", "shapes", settings.Outlet)
+print "\t> Getting outlet shape file\t\t: {0}".format(namelist.Outlet)
+outletshapefile = os.path.join(root, "Data", "shapes", namelist.Outlet)
 
 if os.path.isfile(outletshapefile):
     copyshape(outletshapefile, "outlet", root + "/" + project_name + "/Watershed/Shapes/")
@@ -83,10 +83,10 @@ else:
 print("\t> Getting database tables \t\t: {0}".format(os.path.join(root, "Data", "tables")))
 
 # Here we set lookup tables, usersoil and WGEN_user in the Ref and Project Databases
-soil_lu       = cj.read_from(os.path.join(root, "Data", "tables", settings.soil_lookup))
-landuse_lu    = cj.read_from(os.path.join(root, "Data", "tables", settings.landuse_lookup))
-WGEN_data     = cj.read_from(os.path.join(root, "Data", "tables", settings.WGEN_user))
-usersoil_data = cj.read_from(os.path.join(root, "Data", "tables", settings.Usersoil))
+soil_lu       = cj.read_from(os.path.join(root, "Data", "tables", namelist.soil_lookup))
+landuse_lu    = cj.read_from(os.path.join(root, "Data", "tables", namelist.landuse_lookup))
+WGEN_data     = cj.read_from(os.path.join(root, "Data", "tables", namelist.WGEN_user))
+usersoil_data = cj.read_from(os.path.join(root, "Data", "tables", namelist.Usersoil))
 
 print("\t> Configuring databasses \t\t: {0}.mdb & QSWATRef2012.mdb".format(project_name))
 prj_dbase = mdt.mdb_with_ops(os.path.join(root, project_name, project_name + ".mdb"))
@@ -170,14 +170,14 @@ ref_dbase.disconnect()
 prj_dbase.disconnect()
 
 # Get projection info for the project file
-proj4, is_proj = cj.get_proj4_from(root + "/" + project_name + "/Source/crop/" + settings.Land_Use)
+proj4, is_proj = cj.get_proj4_from(root + "/" + project_name + "/Source/crop/" + namelist.Land_Use)
 
 if not is_proj:
     print("\t\t! Warning: makesure your land use map is projected.")
 
 xmin, ymax, xmax, ymin = cj.get_extents(root + "/" + project_name + "/Source/dem.tif")
 epsg_code, srs_id, prj_name = cj.get_auth(root + "/" + project_name + "/Source/dem.tif")
-soil_epsg_code, soil_srs_id, soil_prj_name = cj.get_auth(os.path.join(root, project_name, "Source", "crop", settings.Land_Use))
+soil_epsg_code, soil_srs_id, soil_prj_name = cj.get_auth(os.path.join(root, project_name, "Source", "crop", namelist.Land_Use))
 
 cj.write_to("epsg_code.tmp~", "{0}".format(epsg_code))
 
@@ -196,50 +196,50 @@ project_file_string = ""
 for line in project_file_list:
     project_file_string += line
 
-new_pj_string = project_file_string.replace('<slopeBands type="QString">[0, 9999]</slopeBands>', '<slopeBands type="QString">[' + settings.Slope_classes + ']</slopeBands>')
-new_pj_string = new_pj_string.replace('<threshold type="int">0000</threshold>', '<threshold type="int">' + str(settings.WS_threshold) + '</threshold>')
-new_pj_string = new_pj_string.replace('<snapThreshold type="int">000</snapThreshold>', '<snapThreshold type="int">' + str(settings.OUT_Snap_threshold) + '</snapThreshold>')
+new_pj_string = project_file_string.replace('<slopeBands type="QString">[0, 9999]</slopeBands>', '<slopeBands type="QString">[' + namelist.Slope_classes + ']</slopeBands>')
+new_pj_string = new_pj_string.replace('<threshold type="int">0000</threshold>', '<threshold type="int">' + str(namelist.WS_threshold) + '</threshold>')
+new_pj_string = new_pj_string.replace('<snapThreshold type="int">000</snapThreshold>', '<snapThreshold type="int">' + str(namelist.OUT_Snap_threshold) + '</snapThreshold>')
 new_pj_string = new_pj_string.replace('default_project_name', project_name)
 
-if settings.HRU_creation_method == 1:
+if namelist.HRU_creation_method == 1:
     new_pj_string = new_pj_string.replace('<isMultiple type="int">1</isMultiple>', '<isMultiple type="int">0</isMultiple>')
-if settings.HRU_creation_method == 2:
+if namelist.HRU_creation_method == 2:
     new_pj_string = new_pj_string.replace('<isDominantHRU type="int">0</isDominantHRU>', '<isDominantHRU type="int">1</isDominantHRU>')
     new_pj_string = new_pj_string.replace('<isMultiple type="int">1</isMultiple>', '<isMultiple type="int">0</isMultiple>')
-if settings.HRU_creation_method == 3:
-    new_pj_string = new_pj_string.replace('<areaVal type="int">0</areaVal>', '<areaVal type="int">' + str(settings.Target_Value) + '</areaVal>')
+if namelist.HRU_creation_method == 3:
+    new_pj_string = new_pj_string.replace('<areaVal type="int">0</areaVal>', '<areaVal type="int">' + str(namelist.Target_Value) + '</areaVal>')
     new_pj_string = new_pj_string.replace('<isArea type="int">0</isArea>', '<isArea type="int">1</isArea>')
-if settings.HRU_creation_method == 4:
+if namelist.HRU_creation_method == 4:
     new_pj_string = new_pj_string.replace('<isTarget type="int">0</isTarget>', '<isTarget type="int">1</isTarget>')
-    new_pj_string = new_pj_string.replace('<targetVal type="int">0</targetVal>', '<targetVal type="int">' + str(settings.Target_Value) + '</targetVal>')
-if settings.HRU_creation_method == 5:
-    new_pj_string = new_pj_string.replace('<landuseVal type="int">0</landuseVal>', '<landuseVal type="int">' + str(settings.HRU_thres_LandUse) + '</landuseVal>')
-    new_pj_string = new_pj_string.replace('<soilVal type="int">0</soilVal>', '<soilVal type="int">' + str(settings.HRU_thres_Soil) + '</soilVal>')
-    new_pj_string = new_pj_string.replace('<slopeVal type="int">0</slopeVal>', '<slopeVal type="int">' + str(settings.HRU_thres_Slope) + '</slopeVal>')
+    new_pj_string = new_pj_string.replace('<targetVal type="int">0</targetVal>', '<targetVal type="int">' + str(namelist.Target_Value) + '</targetVal>')
+if namelist.HRU_creation_method == 5:
+    new_pj_string = new_pj_string.replace('<landuseVal type="int">0</landuseVal>', '<landuseVal type="int">' + str(namelist.HRU_thres_LandUse) + '</landuseVal>')
+    new_pj_string = new_pj_string.replace('<soilVal type="int">0</soilVal>', '<soilVal type="int">' + str(namelist.HRU_thres_Soil) + '</soilVal>')
+    new_pj_string = new_pj_string.replace('<slopeVal type="int">0</slopeVal>', '<slopeVal type="int">' + str(namelist.HRU_thres_Slope) + '</slopeVal>')
 
-if settings.HRU_thresholds_type == 1:
+if namelist.HRU_thresholds_type == 1:
     new_pj_string = new_pj_string.replace('<isArea type="int">0</isArea>', '<isArea type="int">1</isArea>')
-if not settings.Burn_in_shape == "":
+if not namelist.Burn_in_shape == "":
     pass
-    #new_pj_string = new_pj_string.replace('<burn type="QString"></burn>', '<burn type="QString">Source\\' + settings.Burn_in_shape + '</burn>')
+    #new_pj_string = new_pj_string.replace('<burn type="QString"></burn>', '<burn type="QString">Source\\' + namelist.Burn_in_shape + '</burn>')
 
-new_pj_string = new_pj_string.replace('Landuses (Landuse)', 'Landuses (' + str(settings.Land_Use.split(".")[0]) + ')')
-if os.path.isdir(root + "/" + project_name + "/Source/crop/" + settings.Land_Use):
-    new_pj_string = new_pj_string.replace('crop/landuse/hdr.adf', 'crop/' + str(settings.Land_Use) + '/hdr.adf')
-    new_pj_string = new_pj_string.replace('crop\\landuse\\hdr.adf', 'crop\\' + str(settings.Land_Use) + '\\hdr.adf')    
+new_pj_string = new_pj_string.replace('Landuses (Landuse)', 'Landuses (' + str(namelist.Land_Use.split(".")[0]) + ')')
+if os.path.isdir(root + "/" + project_name + "/Source/crop/" + namelist.Land_Use):
+    new_pj_string = new_pj_string.replace('crop/landuse/hdr.adf', 'crop/' + str(namelist.Land_Use) + '/hdr.adf')
+    new_pj_string = new_pj_string.replace('crop\\landuse\\hdr.adf', 'crop\\' + str(namelist.Land_Use) + '\\hdr.adf')    
 else:
-    new_pj_string = new_pj_string.replace('crop/landuse/hdr.adf', 'crop/' + str(settings.Land_Use))        
-    new_pj_string = new_pj_string.replace('crop\\landuse\\hdr.adf', 'crop\\' + str(settings.Land_Use))        
+    new_pj_string = new_pj_string.replace('crop/landuse/hdr.adf', 'crop/' + str(namelist.Land_Use))        
+    new_pj_string = new_pj_string.replace('crop\\landuse\\hdr.adf', 'crop\\' + str(namelist.Land_Use))        
 
-if os.path.isdir(root + "/" + project_name + "/Source/soil/" + settings.Soils):
-    new_pj_string = new_pj_string.replace('soil/soilmap/hdr.adf', 'soil/' + str(settings.Soils) + '/hdr.adf')
-    new_pj_string = new_pj_string.replace('soil\\soilmap\\hdr.adf', 'soil\\' + str(settings.Soils) + '\\hdr.adf')    
+if os.path.isdir(root + "/" + project_name + "/Source/soil/" + namelist.Soils):
+    new_pj_string = new_pj_string.replace('soil/soilmap/hdr.adf', 'soil/' + str(namelist.Soils) + '/hdr.adf')
+    new_pj_string = new_pj_string.replace('soil\\soilmap\\hdr.adf', 'soil\\' + str(namelist.Soils) + '\\hdr.adf')    
 else:
-    new_pj_string = new_pj_string.replace('soil/soilmap/hdr.adf', 'soil/' + str(settings.Soils))        
-    new_pj_string = new_pj_string.replace('soil\\soilmap\\hdr.adf', 'soil\\' + str(settings.Soils)) 
+    new_pj_string = new_pj_string.replace('soil/soilmap/hdr.adf', 'soil/' + str(namelist.Soils))        
+    new_pj_string = new_pj_string.replace('soil\\soilmap\\hdr.adf', 'soil\\' + str(namelist.Soils)) 
 
-new_pj_string = new_pj_string.replace('Landuses__Landuse', 'Landuses__' + str(settings.Land_Use).split(".")[0])
-new_pj_string = new_pj_string.replace('soilmap', '' + str(settings.Soils).split(".")[0])
+new_pj_string = new_pj_string.replace('Landuses__Landuse', 'Landuses__' + str(namelist.Land_Use).split(".")[0])
+new_pj_string = new_pj_string.replace('soilmap', '' + str(namelist.Soils).split(".")[0])
 
 # set projection info
 new_pj_string = new_pj_string.replace('<proj4>default_proj4</proj4>', '<proj4>' + proj4 + '</proj4>')

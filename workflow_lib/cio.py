@@ -4,7 +4,7 @@ import os.path
 
 import cj_function_lib as cj
 import init_file as variables
-import settings
+import namelist
 import mdbtools as mdt
 
 #print variables.ProjMDB
@@ -117,13 +117,13 @@ now = datetime.now()
 
 DateAndTime = str(now.month) + "/" + str(now.day) + "/" + \
     str(now.year) + " " + str(now.time()).split(".")[0]
-SWAT_Vers = "QSWAT Workflow v1.5"
+SWAT_Vers = "QSWAT Workflow v1.5.2"
 
 
 # Parameters
-if settings.Model_Run_period.replace(" ","") != "":
-    NBYR    = int(settings.Model_Run_period.replace(" ","").split("-")[1]) - int(settings.Model_Run_period.replace(" ","").split("-")[0])
-    IYR     = int(settings.Model_Run_period.replace(" ","").split("-")[0])
+if namelist.Model_Run_period.replace(" ","") != "":
+    NBYR    = int(namelist.Model_Run_period.replace(" ","").split("-")[1]) - int(namelist.Model_Run_period.replace(" ","").split("-")[0])
+    IYR     = int(namelist.Model_Run_period.replace(" ","").split("-")[0])
 else:
     NBYR    = cio_table[0].split(",")[1]
     IYR     = cio_table[0].split(",")[2]
@@ -158,10 +158,10 @@ ISPROJ = cio_table[0].split(",")[29]
 ICLB = cio_table[0].split(",")[30]
 #IPRINT = cio_table[0].split(",")[31]
 IPRINT = '0'
-if settings.Warm_up_period == "":
+if namelist.Warm_up_period == "":
     NYSKIP = cio_table[0].split(",")[32]
 else:
-    NYSKIP = settings.Warm_up_period
+    NYSKIP = namelist.Warm_up_period
 ILOG = cio_table[0].split(",")[33]
 IPRP = cio_table[0].split(",")[34]
 IPRS = cio_table[0].split(",")[35]
