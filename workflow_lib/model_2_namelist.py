@@ -45,13 +45,7 @@ for dir_name in dirs:
     if not os.path.isdir("{rt}Data/{dname}".format(rt = root, dname = dir_name)):
         os.makedirs("{rt}Data/{dname}".format(rt = root, dname = dir_name))
 
-# copy rasters, shapefiles and weather
-# if os.path.isdir(WeatherDIR):
-#     weather_files = cj_function_lib.list_files_from(WeatherDIR, "txt")
-#     for w_file in weather_files:
-#         cj_function_lib.copy_file(w_file, "{rt}Data/weather/".format(rt = root))
-
-
+# copy rasters, shapefiles
 all_shapes = cj_function_lib.list_files_from("{pjd}Watershed/Shapes".format(pjd = ProjDir), "*")
 all_in_source = cj_function_lib.list_files_from("{pjd}Source".format(pjd = ProjDir), "*")
 
@@ -105,7 +99,6 @@ for lm_item in landuse_map_list:
         break
     if lm_item.endswith(".tif"):
         landuse_raster_name = lm_item
-
 
 if not dir_soil:
     cj_function_lib.copy_file("{pjd}Source/soil/{so}".format(so = soil_raster_name, pjd = ProjDir), "{rt}Data/".format(rt = root))
@@ -190,6 +183,9 @@ namelist_string = namelist_string.replace("<OUTLET>", "outlet.shp")
 namelist_string = namelist_string.replace("<WS_THRES_TYPE>", "1")
 namelist_string = namelist_string.replace("<WS_THRES_VAL>", "{thres}".format(thres = ws_threshold))
 namelist_string = namelist_string.replace("<OUT_SNAP>", "{thres}".format(thres = snap_threshold))
+
+if is_area == "0":
+    is_area = 2
 
 namelist_string = namelist_string.replace("<BURN_IN_SHAPE>", "")
 namelist_string = namelist_string.replace("<SLOPE_CLASSES>", slope_classes)
