@@ -1,8 +1,8 @@
-# QSWAT_Automated_Workflow v1.5.2
+# QSWAT_Automated_Workflow v1.5.8
 
 Automated workflow for setting up the SWAT Model presented in Chawanda et al., 2018 EMS. 
 
-## What is new in v1.5.2?
+## What is new in v1.5.8?
 Included mechanism to go back from model to input data and namelist.
 New setting in the namelist include:
    * Model_2_namelist
@@ -15,10 +15,7 @@ Descriptions are included in the namelist.
 
 ## To Install
 [Qgis 2.6.1 (32bit)](http://qgis.org/downloads/QGIS-OSGeo4W-2.6.1-1-Setup-x86.exe)   
-[QSWAT 1.5](https://swat.tamu.edu/media/115805/qswatinstall15.zip)   
-[gdal](https://sandbox.idre.ucla.edu/sandbox/tutorials/installing-gdal-for-windows)   
-install pyodbc via `pip install pyodbc`   
-
+[QSWAT Workflow v1.5.8](https://swat.tamu.edu/media/115805/qswatinstall15.zip)   
 
 ## For users
 This repository includes the code for the wrapper presented in this paper. The wrapper runs in 32 bit version of python 2.7.
@@ -36,7 +33,7 @@ This directory contains all the modules for the  workflow
 This directory has an example dataset for testing 
 
 ## Versions
-Version 1.5.2 - December 2018
+Version 1.5.8 - September 2019
 
 ## Authors
 Celray James CHAWANDA   
