@@ -1,0 +1,48 @@
+OID,na,na,na,na,AUTOINCREMENT,1,Unique ID.
+NBYR,1,9999,1,na,INTEGER,1,Number of calendar years simulated
+IYR,1,9000,1,na,INTEGER,1,Beginning year of simulation
+IDAF,1,366,1,na,INTEGER,1,Beginning julian day of simulation
+IDAL,1,366,1,na,INTEGER,1,Ending julian day of simulation
+IGEN,0,100,0,na,INTEGER,1,Random generator seed code
+PCPSIM,1,2,2,na,INTEGER,1,Rainfall input code
+IDT,0,60,0,[minutes],INTEGER,1,Time step used to report measured rainfall data
+IDIST,0,1,0,na,INTEGER,1,Rainfall distribution code used to generated daily precipitation
+REXP,0,2,1.3,na,FLOAT,1,Value of exponent for mixed exponential rainfall distribution
+NRGAGE,0,18,0,na,INTEGER,1,Number of precipitation gage files used in the simulation
+NRTOT,0,32400,0,na,INTEGER,1,Total number of precipitation gage records used in the simulation
+NRGFIL,0,1800,0,na,INTEGER,1,Number of precipitation gage records within each .pcp file
+TMPSIM,1,2,2,na,INTEGER,1,Temperature input code
+NTGAGE,0,18,0,na,INTEGER,1,Number of temperature gage (.tmp) files used in the simulation
+NTTOT,0,16200,0,na,INTEGER,1,Total number of temperature gage records used in the simulation
+NTGFIL,0,900,0,na,INTEGER,1,Number of temperature gage records within each .tmp file
+SLRSIM,1,2,2,na,INTEGER,1,Solar radiation input code
+NSTOT,0,1800,0,na,INTEGER,1,Number of solar radiation records within the .slr file
+RHSIM,1,2,2,na,INTEGER,1,Relative humidity input code
+NHTOT,0,1800,0,na,INTEGER,1,Number of relative humidity records within the .hmd file
+WNDSIM,1,2,2,na,INTEGER,1,Wind speed input code
+NWTOT,0,1800,0,na,INTEGER,1,Number of wind speed records within the .snd file
+FCSTYR,0,9999,1,na,INTEGER,1,Year that the forecast period begins.
+FCSTDAY,0,9999,1,na,INTEGER,1,Day that the forecast period is simulated
+FCSTCYCLES,0,100,1,na,INTEGER,1,Number of times that the forecast period is simulated
+DATES,1/1/1901,12/31/2200,'1/1/2000',na,TEXT(12),1,Start date for simulation.
+DATEF,1/1/1901,12/31/2200,'1/1/2000',na,TEXT(12),1,End date for simulation.
+FDATES,1/1/1901,12/31/2200,'',na,TEXT(12),1,Start date for forecast period.
+ISPROJ,0,1,0,na,INTEGER,1,Special project flag
+ICLB,0,2,0,na,INTEGER,1,Automated method flag 
+IPRINT,0,2,0,na,INTEGER,1,Print code
+NYSKIP,0,10,0,na,INTEGER,1,Number of years to NOT print output
+ILOG,0,1,0,na,INTEGER,1,Streamflow print code
+IPRP,0,1,0,na,INTEGER,1,Print code for output.pst file
+IPRS,0,1,0,na,INTEGER,1,Print code for soil chemical output file
+DEPFILE,na,na,'ATMO.ATM',na,TEXT(40),1,Atmospheric deposition file name
+IPHR,0,1,0,na,INTEGER,1,Code for printing hourly output file (hourq.dat)
+ISTO,0,1,0,na,INTEGER,1,Code for printing soil storage values by soil layer (soilst.out)
+ISOL,0,1,0,na,INTEGER,1,Code for printing phosphorus/nitrogen in soil profile
+I_SUBW,0,1,0,na,INTEGER,1,Code for routing headwaters
+IA_B,0,1,0,na,INTEGER,1,Code for binary output
+IHUMUS,0,1,0,na,INTEGER,1,Code for output file for humus
+ISNOW,0,1,0,na,INTEGER,1,Code for printing snowband.out file
+ITEMP,0,1,0,na,INTEGER,1,Code for channel velocity and depth output files.
+IMGT,0,1,0,na,INTEGER,1,code for printing output.mgt file
+IWTR,0,1,0,na,INTEGER,1,Code for printing output.pot and output.wtr files
+ICALEN,0,1,0,na,INTEGER,1,"Code for printing out calendar or julian dates to .rch, .sub and .hru files"

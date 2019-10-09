@@ -1,0 +1,21 @@
+OID,na,na,na,na,AUTOINCREMENT,1,Unique ID.
+SUBBASIN,na,na,na,na,INTEGER,1,Subbasin ID
+STATION,na,na,na,na,TEXT(80),1,Weather Station name.
+WLATITUDE,-90,90,15,[Degrees],FLOAT,1,Latitude of weather station used to create statistical parameters.
+WLONGITUDE,-180,180,20,[Degrees],FLOAT,1,Longitude of weather station.
+WELEV,0,5000,16,[m],FLOAT,1,Elevation of weather station.
+RAIN_YRS,5,100,14,[Numeric],FLOAT,1,The number of years of maximum monthly 0.5 h rainfall data.
+TMPMX,-30,50,0,[ deg c],FLOAT,12,Average maximum air temperature for month .
+TMPMN,-40,40,1,[ deg c],FLOAT,12,Average minimum air temperature for month.
+TMPSTDMX,0.1,100,2,[ deg c],FLOAT,12,Standard deviation for maximum air temperature in month .
+TMPSTDMN,0.1,30,3,[ deg c],FLOAT,12,Standard deviation for minimum air temperature in month.
+PCPMM,0,600,4,[mm/dd],FLOAT,12,Average amount of precipitation falling in month.
+PCPSTD,0.1,50,5,[mm/dd],FLOAT,12,Standard deviation for daily precipitation in month.
+PCPSKW,-50,20,6,na,FLOAT,12,Skew coefficient for daily precipitation in month.
+PR_W1,0,0.95,7,[fration],FLOAT,12,Probability of a wet day following a dry day in the month.
+PR_W2,0,0.95,8,[fration],FLOAT,12,Probability of a wet day following a wet day in the month.
+PCPD,0,31,9,[days],FLOAT,12,Average number of days of precipitation in month.
+RAINHHMX,0,125,10,[mm],FLOAT,12,Maximum 0.5 hour rainfall in entire period of record for month.
+SOLARAV,0,750,11,[MJ/m2-day],FLOAT,12,Average daily solar radiation in month .
+DEWPT,-50,25,12,[ deg c],FLOAT,12,Average dew point temperature in month.
+WNDAV,0,100,13,[ m/s],FLOAT,12,Average wind speed in month.

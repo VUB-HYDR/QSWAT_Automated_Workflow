@@ -1,0 +1,27 @@
+OID,na,na,na,na,AUTOINCREMENT,1,Unique ID.
+SUBBASIN,1,9999,1,na,INTEGER,1,Subbasin ID
+HRU,1,99999,1,na,INTEGER,1,HRU ID
+LANDUSE,na,na,XXXX,na,TEXT(4),1,Land use code
+SOIL,na,na,XXXX,na,TEXT(40),1,Soil code
+SLOPE_CD,na,na,XXXX,na,TEXT(20),1,Slope code
+SNAM,na,na,XXXX,na,TEXT(100),1,Soil name
+NLAYERS,1,10,-999,na,INTEGER,1,Number of layers in the soil.
+HYDGRP,0,0,-999,na,TEXT(1),1,Soil Hydrologic Group
+SOL_ZMX,0,3500,-999,[mm],FLOAT,1,Maximum rooting depth of soil profile.
+ANION_EXCL,0.01,1,0.5,[fraction],FLOAT,1,Fraction of porosity (void space) from which anions are excluded.
+SOL_CRK,0,1,0.5,[fraction],FLOAT,1, Crack volume potential of soil.
+TEXTURE,0,0,-999,na,TEXT(80),1, Texture of soil layer.
+SOL_Z,0,3500,-999,[mm],FLOAT,10,Depth from soil surface to bottom of layer.
+SOL_BD,0.9,2.5,-999,[g/cm3],FLOAT,10,Moist bulk density.
+SOL_AWC,0,1,-999,[mm/mm],FLOAT,10,Available water capacity of the soil layer.
+SOL_K,0,2000,-999,[mm/hr],FLOAT,10,Saturated hydraulic conductivity.
+SOL_CBN,0.05,10,-999,[%],FLOAT,10,Organic carbon content .
+CLAY,0,100,-999,[%],FLOAT,10,Clay content.
+SILT,0,100,-999,[%],FLOAT,10,Silt content.
+SAND,0,100,-999,[%],FLOAT,10,Sand content.
+ROCK,0,100,-999,[%],FLOAT,10,Rock fragment content.
+SOL_ALB,0,0.25,-999,na,FLOAT,10,Moist soil albedo.
+USLE_K,0,0.65,-999,na,FLOAT,10,USLE equation soil erodibility (K) factor.
+SOL_EC,0,100,-999,[dS/m],FLOAT,10,[Not currently active] Electrical conductivity.
+SOL_CAL,0,65,-999,[%],FLOAT,10,Calcium carbonate content 
+SOL_PH,3,10,-999,na,FLOAT,10,Soil pH 

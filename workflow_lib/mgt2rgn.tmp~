@@ -1,0 +1,67 @@
+OID,na,na,na,na,AUTOINCREMENT,1,Unique ID.
+SUBBASIN,1,9999,1,na,INTEGER,1,Subbasin ID
+HRU,1,99999,1,na,INTEGER,1,HRU ID
+LANDUSE,na,na,XXXX,na,TEXT(4),1,Land use code
+SOIL,na,na,XXXX,na,TEXT(40),1,Soil code
+SLOPE_CD,na,na,XXXX,na,TEXT(20),1,Slope code
+CROP,0,0,999,na,TEXT(4),1,4-Letter Crop Code
+[YEAR],1,10,1,na,INTEGER,1,Year operation takes place.
+[MONTH],1,12,1,na,INTEGER,1,Month operation takes place.
+[DAY],1,31,1,na,INTEGER,1,Day operation takes place.
+HUSC,0,1,0,na,FLOAT,1,Fraction of total heat units for the year at w
+MGT_OP,0,99,1,na,INTEGER,1,Management operation number
+HEATUNITS,0,3500,1800,na,FLOAT,1,Total heat units for cover/plant to reach matu
+PLANT_ID,0,999,1,na,INTEGER,1,Land cover/plant identification from crop.dat.
+CURYR_MAT,0,999,0,[yrs],FLOAT,1,Current age of trees (yrs)
+LAI_INIT,0,100,0,na,FLOAT,1,Initial leaf area index.
+BIO_INIT,0,200,0,[kg/ha],FLOAT,1,Initial dry weight biomass (kg/ha).
+HI_TARG,0,1,0,[(kg/ha)/(kg/ha)],FLOAT,1,Harvest index target ((kg/ha)/(kg/ha)).
+BIO_TARG,0,200,0,[ton/ha],FLOAT,1,Biomass (dry weight) target (metric tons/ha).
+CNOP,0,100,0,na,FLOAT,1,SCS runoff curve number for moisture condition
+IRR_AMT,0,100,0,[mm],FLOAT,1,Depth of irrigation water applied on HRU
+FERT_ID,0,99,0,na,INTEGER,1,Fertilizer identification number.
+FRT_KG,0,500,0,[kg/ha],FLOAT,1,Amount of fertilizer applied to HRU (kg/ha).
+FRT_SURFACE,0,1,0,[fraction],FLOAT,1,Fraction of fertilizer applied to top 10mm of
+PEST_ID,0,999,0,na,INTEGER,1,Pesticide identification code from pesticide d
+PST_KG,0,200,0,[kg/ha],FLOAT,1,Amount of pesticide applied to HRU (kg/ha).
+TILLAGE_ID,0,999,0,na,INTEGER,1,Tillage implement code from till.dat
+HARVEFF,0,1,0,na,FLOAT,1,Harvest efficiency.
+HI_OVR,0,1,0,[(kg/ha)/(kg/ha)],FLOAT,1,Harvest index override ((kg/ha)/(kg/ha))
+GRZ_DAYS,0,366,0,[days],INTEGER,1,Number of consecutive days grazing takes place
+MANURE_ID,0,99,0,na,INTEGER,1,Manure identification code from fert.dat.
+BIO_EAT,0,500,0,[kg/ha-day],FLOAT,1,Dry weight of biomass consumed daily 
+BIO_TRMP,0,500,0,[kg/ha-day],FLOAT,1,Dry weight of biomass trampled daily 
+MANURE_KG,0,500,0,[kg/ha-day],FLOAT,1,Dry weight of manure deposited daily 
+WSTRS_ID,1,2,1,na,INTEGER,1,Water stress identifier
+AUTO_WSTRS,0,1,0.95,na,FLOAT,1,Water stress factor of cover/plant 
+AFERT_ID,1,54,1,na,INTEGER,1,Fertilizer identification number.
+AUTO_NSTRS,0,1,0.75,na,FLOAT,1,Nitrogen stress factor of cover/plant 
+AUTO_NAPP,0,1000,0,[kg/ha],FLOAT,1,Maximum amount of NO^3-N allowed in any one ap
+AUTO_NYR,0,9999,0,[kg/ha],FLOAT,1,Maximum amount of NO3-N allowed to be applied
+AUTO_EFF,0,2,0,na,FLOAT,1,Application efficiency.
+AFRT_SURFACE,0,1,0,[fraction],FLOAT,1,Fraction of fertilizer applied to top 10mm of soil
+SWEEPEFF,0,1,0,na,FLOAT,1,Removal efficiency of sweeping operation.
+FR_CURB,0,1,0,[fraction],FLOAT,1,Fraction of curb length available for sweeping
+IMP_TRIG,0,1,0,na,FLOAT,1,Release/ impound action code.
+FERT_DAYS,0,365,0,[days],INTEGER,1,Duration of fertilization
+CFRT_ID,1,54,0,na,INTEGER,1,Fertilizer identification number.
+IFRT_FREQ,0,365,0,[days],INTEGER,1,Application frequency
+CFRT_KG,0,500,0,[kg/ha],FLOAT,1,Amount of fertilizer applied in each application
+PST_DEP,0,500,0,[mm],FLOAT,1,Depth of pesticide incorporation in the soil
+IHV_GBM,0,1,0,na,INTEGER,1,Grain or biomass harvest code
+IRR_SALT,0,100,0,[mg/kg],FLOAT,1,Concentration of salt in irrigation (mg/kg)
+IRR_EFM,0,1,0,[fraction],FLOAT,1,Irrigation efficiency (fraction).
+IRR_SQ,0,1,0,[fraction],FLOAT,1,Surface runoff ratio (fraction).
+IRR_EFF,0,1,0,[fraction],FLOAT,1,Irrigation efficiency (fraction).
+IRR_MX,0,100,0,[mm],FLOAT,1,Amount of irrigation water applied each time auto irrigation is triggered (mm)
+IRR_ASQ,0,1,0,[fraction],FLOAT,1,Surface runoff ratio (fraction).
+CPST_ID,1,999,0,na,INTEGER,1,Pesticide identification number from pesticide database
+PEST_DAYS,0,365,0,[days],INTEGER,1,Number of days continuous pesticide will be simulated
+IPEST_FREQ,0,60,0,[days],INTEGER,1,Number of days between applications
+CPST_KG,0,200,0,[kg/ha],FLOAT,1,Amount of pesticide applied to HRU on a given day (kg/ha).
+BURN_FRLB,0,1,0,[fraction],FLOAT,1,Fraction of biomass and residue that burn (fraction)
+OP_NUM,0,100,1,na,INTEGER,1,Operation order number within the year.
+IRR_SC,0,5,0,na,INTEGER,1,Irrigation code.
+IRR_NO,0,99999,0,na,INTEGER,1,Irrigation source.
+IRR_SCA,0,5,0,na,INTEGER,1,Irrigation code.
+IRR_NOA,0,99999,0,na,INTEGER,1,Irrigation source.

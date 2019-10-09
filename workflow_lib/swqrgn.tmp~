@@ -1,0 +1,29 @@
+OID,na,na,na,na,AUTOINCREMENT,1,Unique ID.
+SUBBASIN,1,9999,1,na,INTEGER,1,Subbasin ID
+RS1,0.15,1.82,1,[m/day],FLOAT,1,Local algal settling rate in the reach at 20 deg C .
+RS2,0.001,0.1,0.05,[mg/(m**2.day)],FLOAT,1,Benthic (sediment) source rate for dissolved phosphorus in the reach at 20 deg C.
+RS3,0,1,0.5,[mg/(m**2.day)],FLOAT,1,Benthic source rate for NH4-N in the reach at 20 deg C .
+RS4,0.001,0.1,0.05,[1/day],FLOAT,1,Rate coefficient for organic N settling in the reach at 20 deg C.
+RS5,0.001,0.1,0.05,[1/day],FLOAT,1,Organic phosphorus settling rate in the reach at 20 deg C .
+RS6,0.01,10,2.5,[1/day],FLOAT,1,Rate coefficient for settling of arbitrary non-conservative constituent in the reach at 20 deg C.
+RS7,0.01,10,2.5,[mg/(m**2.day)],FLOAT,1,Benthic source rate for arbitrary non-conservative constituent in the reach at 20 deg C.
+RK1,0.02,3.4,1.71,[1/day],FLOAT,1,Carbonaceous biological oxygen demand deoxygenation rate coefficient in the reach at 20 deg C.
+RK2,0,100,50,[1/day],FLOAT,1,Oxygen reaeration rate in accordance with Fickian diffusion in the reach at 20 deg C.
+RK3,-0.36,0.36,0.36,[1/day],FLOAT,1,Rate of loss of carbonaceous biological oxygen demand due to settling in the reach at 20 deg C.
+RK4,0,100,2,[mg/(m**2.day)],FLOAT,1,Benthic oxygen demand rate in the reach at 20 deg C.
+RK5,0.05,4,2,[1/day],FLOAT,1,Coliform die-off rate in the reach at 20 deg C.
+RK6,0,10,1.71,[1/day],FLOAT,1,Decay rate for arbitrary non-conservative constituent in the reach at 20 deg C.
+BC1,0.1,1,0.55,[1/day],FLOAT,1,Rate constant for biological oxidation of NH4 to NO2 in the reach at 20 deg C.
+BC2,0.2,2,1.1,[1/day],FLOAT,1,Rate constant for biological oxidation of NO2 to NO3 in the reach at 20 deg C.
+BC3,0.2,0.4,0.21,[1/day],FLOAT,1,Rate constant for hydrolysis of organic N to NH4 in the reach at 20 deg C.
+BC4,0.01,0.7,0.35,[1/day],FLOAT,1,Rate constant for mineralization of organic P to dissolved P in the reach at 20 deg C.
+CHPST_REA,0,0.1,0.007,[1/day],FLOAT,1, Pesticide reaction coefficient in reach.
+CHPST_VOL,0,10,0.01,[m/day],FLOAT,1, Pesticide volatilization coefficient in reach .
+CHPST_KOC,0,0.1,0,[m3/g],FLOAT,1,[OPTIONAL} Pesticide partition coefficient between water and sediment in reach
+CHPST_STL,0,10,1,[m/day],FLOAT,1, Settling velocity for pesticide sorbed to sediment.
+CHPST_RSP,0,1,0.002,[m/day],FLOAT,1, Resuspension velocity for pesticide sorbed to sediment .
+CHPST_MIX,0,0.1,0.001,[m/day],FLOAT,1, Mixing velocity (diffusion/dispersion) for pesticide in reach .
+SEDPST_CONC,0,1000,0,[mg /m3],FLOAT,1, Initial pesticide concentration in reach bed sediment .
+SEDPST_REA,0,0.1,0.05,[1/day],FLOAT,1, Pesticide reaction coefficient in reach bed sediment.
+SEDPST_BRY,0,0.1,0.002,[m/day],FLOAT,1, Pesticide burial velocity in reach bed sediment.
+SEDPST_ACT,0,1,0.03,[m],FLOAT,1, Depth of active sediment layer for pesticide.

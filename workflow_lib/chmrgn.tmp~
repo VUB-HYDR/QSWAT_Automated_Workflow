@@ -1,0 +1,15 @@
+OID,na,na,na,na,AUTOINCREMENT,1,Unique ID.
+SUBBASIN,1,9999,1,na,INTEGER,1,Subbasin ID
+HRU,1,99999,1,na,INTEGER,1,HRU ID
+LANDUSE,na,na,XXXX,na,TEXT(4),1,Land use code
+SOIL,na,na,XXXX,na,TEXT(40),1,Soil code
+SLOPE_CD,na,na,XXXX,na,TEXT(20),1,Slope code
+SOL_NO3,0,100,0,[mg/kg],FLOAT,10, Initial NO3 concentration in the soil layer.
+SOL_ORGN,0,100,0,[mg/kg],FLOAT,10, Initial organic N concentration in the soil layer .
+SOL_LABP,0,100,5,[mg/kg],FLOAT,10, Initial labile (soluble) P concentration in surface soil layer.
+SOL_ORGP,0,100,0,[mg/kg],FLOAT,10, Initial organic P concentration in surface soil layer.
+PESTNAME,na,na,'',na,TEXT(20),10,Pesticide name
+PLTPST,0,5,0,[kg/ha],FLOAT,10, Initial pesticide amount on foliage.
+SOLPST,0,5,0,[mg/kg],FLOAT,10, Initial pesticide amount in soil .
+PSTENR,0,5,0,na,FLOAT,10, Enrichment ratio for pesticide in the soil.
+PPERCO_SUB,10,17.5,10,na,FLOAT,10, Phosphorus percolation coefficient.

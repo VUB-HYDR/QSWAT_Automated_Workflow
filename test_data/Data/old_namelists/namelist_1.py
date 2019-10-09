@@ -2,7 +2,7 @@
 
 # Project Identification
 Project_Name     = "robit"
-Model_2_namelist = False        # True = get settings from existing model 
+Model_2_namelist = True        # True = get settings from existing model 
                                 # False = get model from current settings
 
 """---------------------------   File Names  --------------------------"""
@@ -75,7 +75,7 @@ timestep              = 0            # timestep for printing results: 0 = monthl
 cal_file              = ""           # a model.in file (format of swatcup) with parameters for the calibrated model
                                      # leave as "" if there is no file to be used.
 calibrate              = False       # set to "True" to perform calibration, "False" to skip calibration
-make_figures           = True        # set to "True" to create maps, "False" to skip map creation
+make_figures           = False        # set to "True" to create maps, "False" to skip map creation
 
 # Log progress or not? If yes, you will not see updates
 log                   = False        # True or False

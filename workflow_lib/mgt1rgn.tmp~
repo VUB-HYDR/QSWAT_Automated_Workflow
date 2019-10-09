@@ -1,0 +1,30 @@
+OID,na,na,na,na,AUTOINCREMENT,1,Unique ID.
+SUBBASIN,1,9999,1,na,INTEGER,1,Subbasin ID
+HRU,1,99999,1,na,INTEGER,1,HRU ID
+LANDUSE,na,na,XXXX,na,TEXT(4),1,Land use code
+SOIL,na,na,XXXX,na,TEXT(40),1,Soil code
+SLOPE_CD,na,na,XXXX,na,TEXT(20),1,Slope code
+IGRO,0,1,0,na,INTEGER,1,Land cover status code.
+PLANT_ID,0,99,0,na,INTEGER,1,Land cover identification
+LAI_INIT,0,8,0,na,FLOAT,1,Initial leaf area index.
+BIO_INIT,0,1000,0,[kg/ha],FLOAT,1,Initial dry weight biomas (kg/ha)
+PHU_PLT,0,3500,0,[phu],FLOAT,1,Total number of heat unit
+BIOMIX,0,1,0.2,na,FLOAT,1,Biological mixing efficie
+CN2,35,98,-999,na,FLOAT,1,SCS runoff curve number for moisture condition 2
+USLE_P,0,1,1,na,FLOAT,1,USLE equation support practice
+BIO_MIN,0,5000,0,[kg/ha],FLOAT,1,Minimum plant biomass for grazing
+FILTERW,0,100,0,[m],FLOAT,1,[OPTIONAL] Width of edge-of-field filter strip (m)
+IURBAN,0,2,0,na,INTEGER,1,"Urban simulation code, 0-none, 1-USGS, 2-buildup/washoff"
+URBLU,0,99,0,na,INTEGER,1,Urban land type
+IRRSC,0,5,0,na,INTEGER,1,Irrigation code
+IRRNO,0,9999,0,na,INTEGER,1,Irrigation source location
+FLOWMIN,0,100,0,[m3/s],FLOAT,1,[OPTIONAL] Minimum in-stream flow for irrigation diversions
+DIVMAX,-150,150,0,[mm],FLOAT,1,[OPTIONAL] Maximum daily irrigation diversion from the reach.
+FLOWFR,0,1,0,[fraction],FLOAT,1,Fraction of available flow that is allowed to be applied to the HRU.
+DDRAIN,0,2000,0,[mm],FLOAT,1,Depth to subsurface drain.
+TDRAIN,0,72,0,[hr],FLOAT,1,Time to drain soil to field capacity.
+GDRAIN,0,100,0,[hr],FLOAT,1,Drain tile lag time.
+NROT,0,100,1,na,INTEGER,1,Number of years of rotation.
+HUSC,0,1,0,na,INTEGER,1,"Heat Unit scheduleing flag, 0 = heat units, 1 = dates."
+ISCROP,0,1,1,na,INTEGER,1,"Crop flag, 1 = crop"
+CN_SLOPE,0,1,0,na,INTEGER,1,Slope CN adjustment flag; 1 = adjust CN for slope.

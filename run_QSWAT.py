@@ -35,17 +35,17 @@ copy_file("namelist.py", home_dir + "/workflow_lib/namelist.py")
 os.chdir(home_dir + "/workflow_lib/")
 
 if not Model_2_namelist:
-    run_and_log(python + ' "' + os.path.join(home_dir, 'workflow_lib', 'prepare_project.py') + '"', log, '"' + os.path.join(home_dir, 'log.txt') + '"', "w", current_dir)
-    run_and_log(python + ' "' + os.path.join(home_dir, 'workflow_lib', 'main.py') + '"', log, '"' + os.path.join(home_dir, 'log.txt') + '"', "a", current_dir)
+    run_and_log(python + ' "' + os.path.join(home_dir, 'workflow_lib', 'prepare_project.py') + '"', log, '"' + os.path.join(home_dir, 'log.txt') + '"', "w", '"' + current_dir + '"')
+    run_and_log(python + ' "' + os.path.join(home_dir, 'workflow_lib', 'main.py') + '"', log, '"' + os.path.join(home_dir, 'log.txt') + '"', "a", '"' + current_dir + '"')
 else:
-    run_and_log(python + ' "' + os.path.join(home_dir, 'workflow_lib', 'model_2_namelist.py') + '"', log, '"' + os.path.join(home_dir, 'log.txt') + '"', "a", current_dir)
+    run_and_log(python + ' "' + os.path.join(home_dir, 'workflow_lib', 'model_2_namelist.py') + '"', log, '"' + os.path.join(home_dir, 'log.txt') + '"', "a", '"' + current_dir + '"')
 
 if not Model_2_namelist:
     if calibrate:
-        run_and_log(python + ' "' + os.path.join(home_dir, 'workflow_lib', 'calibrate_model.py') + '"', False, '"' + os.path.join(home_dir, 'log.txt') + '"', "a", current_dir + " " + Project_Name)
+        run_and_log(python + ' "' + os.path.join(home_dir, 'workflow_lib', 'calibrate_model.py') + '"', False, '"' + os.path.join(home_dir, 'log.txt') + '"', "a", '"' + current_dir + '"' + ' ' + Project_Name)
 
     if make_figures:
-        run_and_log(python + ' "' + os.path.join(home_dir, 'workflow_lib', 'figures.py') + '"', False, '"' + os.path.join(home_dir, 'log.txt') + '"', "a", os.path.join(current_dir, "model", Project_Name) + " sub null " + " ".join([str(i) for i in range(int(Model_Run_period.split(" ")[0].split("-")[0]), int(Model_Run_period.split(" ")[-1].split("-")[-1]) + 1 )]))
+        run_and_log(python + ' "' + os.path.join(home_dir, 'workflow_lib', 'figures.py') + '"', False, '"' + os.path.join(home_dir, 'log.txt') + '"', "a", os.path.join('"' + current_dir + '"', "model", Project_Name) + " sub null " + " ".join([str(i) for i in range(int(Model_Run_period.split(" ")[0].split("-")[0]), int(Model_Run_period.split(" ")[-1].split("-")[-1]) + 1 )]))
 
 time_end = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 print("Run Time:\n   From : " + time_begin)

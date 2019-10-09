@@ -1,0 +1,51 @@
+OID,na,na,na,na,AUTOINCREMENT,1,Unique ID.
+SUBBASIN,1,9999,1,na,INTEGER,1,Subbasin ID
+HRU,1,99999,1,na,INTEGER,1,HRU ID
+LANDUSE,na,na,XXXX,na,TEXT(4),1,Land use code
+SOIL,na,na,XXXX,na,TEXT(40),1,Soil code
+SLOPE_CD,na,na,XXXX,na,TEXT(20),1,Slope code
+HRU_FR,0,1,-999,na,FLOAT,1,[NOT EDITABLE] Fraction of total watershed area contained in HRU.
+SLSUBBSN,10,150,50,[m],FLOAT,1,Average slope length.
+HRU_SLP,0,0.6,-999,[m/m],FLOAT,1,Average slope steepness.
+OV_N,0.01,30,-999,na,FLOAT,1,"Manning's ""n"" value for overland flow."
+LAT_TTIME,0,180,0,[days],FLOAT,1,Lateral flow travel time.
+LAT_SED,0,5000,0,[mg/l],FLOAT,1,Sediment concentration in lateral flow and groundwater flow .
+SLSOIL,0,150,0,[m],FLOAT,1,Slope length for lateral subsurface flow.
+CANMX,0,100,0,[mm],FLOAT,1,[OPTIONAL] Maximum canopy storage.
+ESCO,0,1,0.95,na,FLOAT,1,Soil evaporation compensation factor.
+EPCO,0,1,1,na,FLOAT,1,Plant uptake compensation factor.
+RSDIN,0,10000,0,[kg/ha],FLOAT,1,[OPTIONAL] Initial residue cover (kg/ha).
+ERORGN,0,5,0,na,FLOAT,1,Organic N enrichment ratio.
+ERORGP,0,5,0,na,FLOAT,1,Organic P enrichment ratio.
+POT_FR,0,1,0,[fraction],FLOAT,1,Fraction of HRU area that drains into the pothole.
+FLD_FR,0,1,0,[fraction],FLOAT,1,Fraction of HRU area that drains into floodplain
+RIP_FR,0,1,0,[fraction],FLOAT,1,Fraction of HRU area that drains into riparian area
+POT_TILE,0,100,0,[mm],FLOAT,1,Average daily outflow to main channel from tile flow (DEPTH (MM) OVER ENTIRE HRU)
+POT_VOLX,0,100,0,[mm],FLOAT,1,Maximum volume of water stored in the pothole  (DEPTH (MM) OVER ENTIRE HRU)
+POT_VOL,0,100,0,[mm],FLOAT,1,Initial volume of water stored in the pothole (DEPTH (MM) OVER ENTIRE HRU)
+POT_NSED,0,100,0,[mg/l],FLOAT,1,Normal sediment concentration in pothole.
+POT_NO3L,0,1,0,[mg/l],FLOAT,1,[Not currently active]. Nitrate decay rate in pothole.
+DEP_IMP,0,6000,6000,[mm],FLOAT,1,[OPTIONAL] Depth to impervious layer for modeling perched water tables
+DIS_STREAM,0,100000,35,[m],FLOAT,1,Average distance to stream (m)
+EVPOT,0,2,0.5,na,FLOAT,1,Pothole evaporation coefficient
+CF,0.5,1,1,na,FLOAT,1,Decomposition response to soil temperature and moisture
+CFH,0.5,1.5,1,na,FLOAT,1,Maximum humification rate
+CFDEC,0,1,0.055,na,FLOAT,1,Undistrurbed soil turnover rate under optimum soil water and temperature
+SED_CON,0,5000,0,[ppm],FLOAT,1,"Sediment concentration in runoff, after urban BMP is applied"
+ORGN_CON,0,100,0,[ppm],FLOAT,1,"Organic nitrogen concentration in runoff, after urban BMP is applied"
+ORGP_CON,0,50,0,[ppm],FLOAT,1,"Organic phosphorus concentration in runoff, after urban BMP is applied"
+SOLN_CON,0,10,0,[ppm],FLOAT,1,"Soluble nitrogen concentration un runoff, after urban BMP is applied"
+SOLP_CON,0,3,0,[ppm],FLOAT,1,"Soluble phosphorus concentration un runoff, after urban BMP is applied"
+RE,25,100,50,[mm],FLOAT,1,Effective radius of drains
+SDRAIN,7600,30000,15000,[mm],FLOAT,1,Dist between two drain or tile tubes
+DRAIN_CO,10,51,10,[mm/day],FLOAT,1,Drainage coefficient
+PC,0,5,1,[mm/hr],FLOAT,1,Pump capacity
+LATKSATF,0.01,4,1,na,FLOAT,1,Multiplication factor to determine lateral ksat from SWAT ksat input value
+POT_SOLP,0.01,0.5,0.01,[1/d],FLOAT,1,Soluble P loss rate in the pothole
+POT_K,0.01,10,0.01,[mm/hr],FLOAT,1,Hydraulic conductivity of soil surface of  pothole
+N_REDUC,0,300,300,na,FLOAT,1,Nitrogen uptake reduction factor not currently used
+N_LAG,0.001,1,0.25,na,FLOAT,1,Lag coefficient for calculating nitrate concentration in subsurface drains
+N_LN,1.0,3.0,2.0,na,FLOAT,1,Power function exponent for calculating nitrate concentration in subsurface drains
+N_LNCO,0.5,4.0,2.0,na,FLOAT,1,Coefficient for power function for calculating nitrate concentration in subsurface drains
+SURLAG,0,24,2.0,[days],FLOAT,1,Surface runoff lag time in the HRU
+R2ADJ,0.5,3.0,1,na,FLOAT,1,Curve number retention parameter adjustment factor to adjust surface runoff for flat slopes

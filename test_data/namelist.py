@@ -67,9 +67,9 @@ Run_off_method        = 1           # 1 = SCS Curve Number, 2 = Green & Ampt
 
 
 # model run settings
-Model_Run_period      = "1990 - 2013"# e.g. "1975 - 1980". period to run the simulation from file.cio,
+Model_Run_period      = "1990 - 1997"# e.g. "1975 - 1980". period to run the simulation from file.cio,
                                      # leave as "" to run whole period where weather data is available
-Warm_up_period        = 0            # the number of years for running the model without printing output
+Warm_up_period        = 2            # the number of years for running the model without printing output
 timestep              = 0            # timestep for printing results: 0 = monthly, 1 = daily 3 = yearly
 
 cal_file              = ""           # a model.in file (format of swatcup) with parameters for the calibrated model

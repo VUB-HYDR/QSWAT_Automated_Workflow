@@ -132,6 +132,6 @@ for year in yearly_gpd_df:
         ax.set_title("{var} in {yr}".format(var = variable, yr = year), fontdict=   {'fontsize': '12', 'fontweight' : '3'})
         yearly_gpd_df[year].plot(ax = ax, column=variable, cmap="Blues",    linewidth=0.8, edgecolor='0.8', legend = True)
 
-        print("\t - {1}_{0}.jpg".format(year,   variable))
-        fig.savefig(os.path.join(output_directory, "{1}_{0}.jpg".format(year,   variable)))
+        print("\t - {1}_{0}.png".format(year,   variable))
+        fig.savefig(os.path.join(output_directory, "{1}_{0}.png".format(year,   variable)))
         plt.close(fig)

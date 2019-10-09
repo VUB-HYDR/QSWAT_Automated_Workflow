@@ -1,0 +1,22 @@
+OID,na,na,na,na,AUTOINCREMENT,1,Unique ID.
+SUBBASIN,1,9999,1,na,INTEGER,1,Subbasin ID
+HRU,1,99999,1,na,INTEGER,1,HRU ID
+LANDUSE,na,na,XXXX,na,TEXT(4),1,Land use code
+SOIL,na,na,XXXX,na,TEXT(40),1,Soil code
+SLOPE_CD,na,na,XXXX,na,TEXT(20),1,Slope code
+SHALLST,0,5000,1000,[mm],FLOAT,1,Initial depth of water in the shallow aquifer.
+DEEPST,0,10000,2000,[mm],FLOAT,1,Initial depth of water in the deep aquifer .
+GW_DELAY,0,500,31,[days],FLOAT,1,Groundwater delay.
+ALPHA_BF,0,1,0.048,[days],FLOAT,1,Baseflow alpha factor.
+GWQMN,0,5000,1000,[mm],FLOAT,1,Threshold depth of water in the shallow aquifer required for return flow to occur.
+GW_REVAP,0.02,0.2,0.02,na,FLOAT,1,"Groundwater ""revap"" coefficient."
+REVAPMN,0,1000,750,[mm],FLOAT,1,"Threshold depth of water in the shallow aquifer for ""revap"" to occur."
+RCHRG_DP,0,1,0.05,[fraction],FLOAT,1,Deep aquifer percolation fraction.
+GWHT,0,25,1,[mm],FLOAT,1,[OPTIONAL] Initial groundwater height.
+GW_SPYLD,0,0.4,0.003,[m3/m3],FLOAT,1,[OPTIONAL] Specific yield of the shallow aquifer.
+SHALLST_N,0,1000,0,[mg/l],FLOAT,1,[OPTIONAL] Concentration of nitrate in groundwater contribution to streamflow from subbasin.
+GWSOLP,0,1000,0,[mg/l],FLOAT,1,[OPTIONAL] Concentration of soluble phosphorus in groundwater contribution to streamflow from subbasin.
+HLIFE_NGW,0,200,0,[days],FLOAT,1,[OPTIONAL] Half-life of nitrate in the shallow aquifer (days)
+LAT_ORGN,0,200,0,[mg/l],FLOAT,1,Organic N in the base flow (mg/l)
+LAT_ORGP,0,200,0,[mg/l],FLOAT,1,Organic P in the base flow (mg/l)
+ALPHA_BF_D,0,1,0.01,[days],FLOAT,1,Baseflow alpha factor for deep aquifer.

@@ -1,0 +1,6 @@
+OID,na,na,na,na,AUTOINCREMENT,1,Unique ID.
+SUBBASIN,1,9999,1,na,INTEGER,1,Subbasin ID
+WUPND,0,10000,0,[10^4 m3/day],FLOAT,12, Average daily water removal from the pond for the month.
+WURCH,0,10000,0,[10^4 m3/day],FLOAT,12, Average daily water removal from the reach for the month.
+WUSHAL,0,10000,0,[10^4 m3/day],FLOAT,12, Average daily water removal from the shallow aquifer for the month .
+WUDEEP,0,10000,0,[10^4 m3/day],FLOAT,12, Average daily water removal from the deep aquifer for the month.

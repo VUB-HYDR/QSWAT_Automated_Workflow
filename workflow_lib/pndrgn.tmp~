@@ -1,0 +1,48 @@
+OID,na,na,na,na,AUTOINCREMENT,1,Unique ID.
+SUBBASIN,1,9999,1,na,INTEGER,1,Subbasin ID
+PND_FR,0,1,0,[fraction],FLOAT,1,Fraction of subbasin area that drains into ponds.
+PND_PSA,0.1,20,5,[ha],FLOAT,1,Surface area of ponds when filled to principal spillway
+PND_PVOL,0,100,25,[10^4 m3],FLOAT,1,Volume of water needed to fill ponds to the principal spillway.
+PND_ESA,0.1,30,8,[ha],FLOAT,1,[OPTIONAL] Surface area of ponds when filled to emergency spillway.
+PND_EVOL,0,125,40,[10^4 m3],FLOAT,1,[OPTIONAL] Volume of water stored in ponds when filled to the emergency spillway.
+PND_VOL,0,100,0,[10^4 m3],FLOAT,1,Initial volume of water in ponds.
+PND_SED,0,5000,0,[mg/l],FLOAT,1,Initial sediment concentration in pond water
+PND_NSED,0,5000,0,[mg/l],FLOAT,1,Normal sediment concentration in pond water .
+PND_K,0,1,0,[mm/hr],FLOAT,1,Hydraulic conductivity through bottom of ponds.
+IFLOD1,0,12,0,na,INTEGER,1, Beginning month of non-flood season.
+IFLOD2,0,12,0,na,INTEGER,1, Ending month of non-flood season.
+NDTARG,0,60,0,[days],INTEGER,1, Number of days needed to reach target storage from current pond storage.
+PSETLP1,0,20,10,[m/yr],FLOAT,1, Phosphorus settling rate in pond for months IPND1 through IPND2.
+PSETLP2,0,20,10,[m/yr],FLOAT,1, Phosphorus settling rate in pond for months other than IPND1-IPND2.
+NSETLP1,0,20,5.5,[m/yr],FLOAT,1, Nitrogen settling rate in pond for months IPND1 through IPND2 .
+NSETLP2,0,20,5.5,[m/yr],FLOAT,1, Nitrogen settling rate in pond for months other than IPND1-IPND2 .
+CHLAP,0,1,1,na,FLOAT,1, Chlorophyll a production coefficient for ponds.
+SECCIP,0,1,1,na,FLOAT,1, Water clarity coefficient for ponds.
+PND_NO3,0,100,0,[mg/l],FLOAT,1, Initial concentration of NO3-N in pond.
+PND_SOLP,0,50,0,[mg/l],FLOAT,1, Initial concentration of soluble P in pond.
+PND_ORGN,0,75,0,[mg/l],FLOAT,1, Initial concentration of organic N in pond .
+PND_ORGP,0,50,0,[mg/l],FLOAT,1, Initial concentration of organic P in pond .
+IPND1,0,12,1,na,INTEGER,1," Beginning month of mid-year nutrient settling ""season""."
+IPND2,0,12,1,na,INTEGER,1," Ending month of mid-year nutrient settling ""season""."
+WET_FR,0,1,0,[fraction],FLOAT,1,Fraction of subbasin area that drains into wetlands.
+WET_NSA,0,3000,0,[ha],FLOAT,1,Surface area of wetlands at normal water level .
+WET_NVOL,0,300,0,[10^4 m3],FLOAT,1,Volume of water stored in wetlands when filled to normal water level .
+WET_MXSA,0,3000,0,[ha],FLOAT,1,Surface area of wetlands at maximum water level .
+WET_MXVOL,0,300,0,[10^4 m3],FLOAT,1,Volume of water stored in wetlands when filled to maximum water level .
+WET_VOL,0,100,0,[10^4 m3],FLOAT,1,Initial volume of water in wetlands.
+WET_SED,0,5000,0,[mg/l],FLOAT,1,Initial sediment concentration in wetland water.
+WET_NSED,0,5000,0,[mg/l],FLOAT,1,Normal sediment concentration in wetland water .
+WET_K,0,1,0,[mm/hr],FLOAT,1,Hydraulic conductivity of bottom of wetlands.
+PSETLW1,0,20,0,[m/yr],FLOAT,1, Phosphorus settling rate in wetland for months IPND1 through IPND2 .
+PSETLW2,0,20,0,[m/yr],FLOAT,1, Phosphorus settling rate in wetlands for months other than IPND1-IPND2.
+NSETLW1,0,20,0,[m/yr],FLOAT,1, Nitrogen settling rate in wetlands for months IPND1 through IPND2 .
+NSETLW2,0,20,0,[m/yr],FLOAT,1, Nitrogen settling rate in wetlands for months other than IPND1-IPND2.
+CHLAW,0,1,0,na,FLOAT,1, Chlorophyll a production coefficient for wetlands.
+SECCIW,0,1,0,na,FLOAT,1,Water clarity coefficient for wetlands.
+WET_NO3,0,100,0,[mg/l],FLOAT,1, Initial concentration of NO3-N in wetland .
+WET_SOLP,0,50,0,[mg/l],FLOAT,1, Initial concentration of soluble P in wetland .
+WET_ORGN,0,75,0,[mg/l],FLOAT,1, Initial concentration of organic N in wetland.
+WET_ORGP,0,50,0,[mg/l],FLOAT,1, Initial concentration of organic P in wetland .
+PNDEVCOEFF,0,5,0,na,FLOAT,1, Actual pond evaporation is equal to the potential evaporation times the pond evaporation coefficient.
+WETEVCOEFF,0,5,0,na,FLOAT,1, Actual wetland evaporation is equal to the potential evaporation times the pond evaporation coefficient.
+PND_D50,0,32000,0,[um],FLOAT,1, Median particle diameter of sediment [um].

@@ -1,0 +1,37 @@
+OID,na,na,na,na,AUTOINCREMENT,1,Unique ID.
+SUBBASIN,1,9999,1,na,INTEGER,1,Subbasin ID
+CH_W2,0,1000,-999,[m],FLOAT,1,Average width of main channel.
+CH_D,0,30,-999,[m],FLOAT,1,Average depth of main channel.
+CH_S2,-0.001,10,-999,[m/m],FLOAT,1,Average slope of main channel.
+CH_L2,-0.05,500,-999,[km],FLOAT,1,Length of main channel.
+CH_N2,-0.01,0.3,0.014,na,FLOAT,1,"Manning's ""n"" value for the main channel."
+CH_K2,-0.01,500,0,[mm/hr],FLOAT,1,Effective hydraulic conductivity in main channel alluvium.
+CH_COV1,-0.05,0.6,0,na,FLOAT,1,Channel erodibility factor.
+CH_COV2,-0.001,1,0,na,FLOAT,1,Channel cover factor.
+CH_WDR,0,10000,0,na,FLOAT,1,Channel width-depth ratio.
+ALPHA_BNK,0,1,0,na,FLOAT,1,Baseflow alpha factor for bank storage.
+ICANAL,0,1,0,na,FLOAT,1,Code for irrigation canal
+CH_ONCO,0,100,0,[ppm],FLOAT,1,Organic nitrogen concentration in the channel (ppm)
+CH_OPCO,0,100,0,[ppm],FLOAT,1,Organic phosphorus concentration in the channel (ppm)
+CH_SIDE,0,5,0,na,FLOAT,1,Change in horizontal distance per unit vertical distance
+CH_BNK_BD,1.1,1.9,0,[g/cm3],FLOAT,1,Bulk density of channel bank sediment (g/cc)
+CH_BED_BD,1.1,1.9,0,[g/cm3],FLOAT,1,Bulk density of channel bed sediment (g/cc) 
+CH_BNK_KD,0.001,3.75,0,[cm3/N-s],FLOAT,1,Erodibility of channel bank sediment by jet test (cm3/N-s)
+CH_BED_KD,0.001,3.75,0,[cm3/N-s],FLOAT,1,Erodibility of channel bed sediment by jet test (cm3/N-s)
+CH_BNK_D50,1,10000,0,[um],FLOAT,1,D50 Median particle size diameter of channel bank sediment (micro-m)
+CH_BED_D50,1,10000,0,[um],FLOAT,1,D50 Median particle size diameter of channel bed sediment (micro-m)
+CH_BNK_TC,0,400,0,[N/m2],FLOAT,1,Critical shear stress of channel bank (N/m2)
+CH_BED_TC,0,400,0,[N/m2],FLOAT,1,Critical shear stress of channel bed (N/m2)
+CH_ERODMO1,0,1,0,na,FLOAT,1,Jan. channel erodability factor
+CH_ERODMO2,0,1,0,na,FLOAT,1,Feb. channel erodability factor
+CH_ERODMO3,0,1,0,na,FLOAT,1,Mar. channel erodability factor
+CH_ERODMO4,0,1,0,na,FLOAT,1,Apr. channel erodability factor
+CH_ERODMO5,0,1,0,na,FLOAT,1,May channel erodability factor
+CH_ERODMO6,0,1,0,na,FLOAT,1,Jun. channel erodability factor
+CH_ERODMO7,0,1,0,na,FLOAT,1,Jul. channel erodability factor
+CH_ERODMO8,0,1,0,na,FLOAT,1,Aug. channel erodability factor
+CH_ERODMO9,0,1,0,na,FLOAT,1,Sep. channel erodability factor
+CH_ERODMO10,0,1,0,na,FLOAT,1,Oct. channel erodability factor
+CH_ERODMO11,0,1,0,na,FLOAT,1,Nov. channel erodability factor
+CH_ERODMO12,0,1,0,na,FLOAT,1,Dec. channel erodability factor
+CH_EQN,0,4,0,na,INTEGER,1,Sediment routing method

@@ -1,0 +1,30 @@
+OID,na,na,na,na,AUTOINCREMENT,1,Unique ID.
+SUBBASIN,0,9999,1,na,INTEGER,1,Subbasin ID
+SUB_KM,0,1000000,-999,[km],FLOAT,1,Subbasin area.
+SUB_LAT,-90,90,-999,[degrees],FLOAT,1,Latitude of subbasin.
+SUB_ELEV,0,5000,-999,[m],FLOAT,1,Elevation of subbasin.
+IRGAGE,0,5400,0,na,INTEGER,1,Number of measured precipitation station used in subbasin.
+ITGAGE,0,5400,0,na,INTEGER,1,Number of measured temperature station used in subbasin.
+ISGAGE,0,300,0,na,INTEGER,1,Number of measured solar station used in subbasin.
+IHGAGE,0,300,0,na,INTEGER,1,Number of measured humidity station used in subbasin.
+IWGAGE,0,300,0,na,INTEGER,1,Number of measured wind station used in subbasin.
+ELEVB,0,8000,0,[m],FLOAT,10, Elevation at the center of the elevation band.
+ELEVB_FR,0,1,0,[fraction],FLOAT,10, Fraction of subbasin area within the elevation band.
+SNOEB,0,300,0,[mm],FLOAT,10, Initial snow water content in elevation band.
+PLAPS,-500,500,0,[mm/km],FLOAT,1, Precipitation lapse rate.
+TLAPS,-50,50,0,(deg C/km],FLOAT,1, Temperature lapse rate.
+SNO_SUB,0,150,0,[mm],FLOAT,1, Initial snow water content.
+CH_L1,0.05,200,-999,[km],FLOAT,1,Longest tributary channel length in subbasin.
+CH_S1,0.0001,10,-999,[m/m],FLOAT,1,Average slope of tributary channels.
+CH_W1,1,1000,-999,[m],FLOAT,1,Average width of tributary channels (m).
+CH_K1,0,300,0,[mm/hr],FLOAT,1,Effective hydraulic conductivity in tributary channel alluvium .
+CH_N1,0.01,30,0.014,na,FLOAT,1,"Manning's ""n"" value for the tributary channels."
+CO2,0,800,330,[ppm],FLOAT,1,Carbon dioxide concentration.
+RFINC,0,100,0,[%],FLOAT,12, Rainfall adjustment.
+TMPINC,0,100,0,[deg C],FLOAT,12, Temperature adjustment.
+RADINC,0,100,0,[MJ/m2-day],FLOAT,12, Radiation adjustment.
+HUMINC,-1,1,0,[fraction],FLOAT,12, Humidity adjustment.
+HRUTOT,0,240,-999,na,INTEGER,1,Total number of HRUs modeled in subbasin.
+IPOT,0,9999,0,na,INTEGER,1,HRU ID of the HRU that represents the pothole (NO LONGER USED)
+FCST_REG,1,999,1,na,INTEGER,1,Weather forecast region assigned to subbasin.
+SUBSNOW,0,1,0,na,INTEGER,1,ArcSWAT: Flag to indicate if subbasin-level snow parameters ae used in subbasin.

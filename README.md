@@ -1,17 +1,15 @@
 # QSWAT_Automated_Workflow v1.5.8
 
-Automated workflow for setting up the SWAT Model presented in Chawanda et al., 2018 EMS. 
+Automated workflow for setting up the SWAT Model presented in Chawanda et al., 2019 EMS. 
+## Find instructions in the [User mannual](./manual.pdf)
 
 ## What is new in v1.5.8?
 Included mechanism to go back from model to input data and namelist.
-New setting in the namelist include:
-   * Model_2_namelist
-   * ET_method
-   * Routing_method
-   * Rainfall_timestep
-   * Run_off_method
-Descriptions are included in the namelist.
+New features in the namelist include:
+   * Create Figures
+   * Run Calibration
 
+Descriptions are included in the namelist.
 
 ## To Install
 [Qgis 2.6.1 (32bit)](http://qgis.org/downloads/QGIS-OSGeo4W-2.6.1-1-Setup-x86.exe)   
@@ -20,20 +18,23 @@ Descriptions are included in the namelist.
 ## For users
 This repository includes the code for the wrapper presented in this paper. The wrapper runs in 32 bit version of python 2.7.
 
-### 1. [runQSWAT.py](./runQSWAT.py) 
-This is the file used to launch the model set up process
+### 1. [run_QSWAT.py](./run_QSWAT.py) 
+This file is called when the command "runQSWAT.bat" is passed in command prompt or powershell
 
-### 2. [namelist.py](./namelist.py)
+### 2. [run_QSWAT.py](./run_QSWAT.py) 
+This file is used by [runQSWAT.bat](./runQSWAT.bat) to launch the model set up process
+
+### 3. [namelist.py](./namelist.py)
 This is the file where all settings for the configuration of the model are entered
 
-### 3. [workflow_lib](./workflow_lib)
+### 4. [workflow_lib](./workflow_lib)
 This directory contains all the modules for the  workflow
 
-### 4. [Data](./Data)
-This directory has an example dataset for testing 
+### 5. [test_data](./test_data)
+This directory has an example data-set for testing 
 
 ## Versions
-Version 1.5.8 - September 2019
+Version 1.5.8 - October 2019
 
 ## Authors
 Celray James CHAWANDA   

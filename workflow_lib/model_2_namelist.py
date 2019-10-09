@@ -15,6 +15,8 @@ import ntpath
 
 from init_file import ProjMDB, QSWAT_MDB, WeatherDIR, DefaultSimDir, ProjName, ProjDir, root
 
+root = root.replace("model/", "")
+
 def get_db_value(connection, table, column_name, row_number):
     '''
     Function to retrieve value specifying row and column
@@ -73,7 +75,7 @@ for sf_extension in shape_extensions:
         "{rt}Data/shapes/riv1.{sfe}".format(sfe = sf_extension, rt = root)
         )
 
-cj_function_lib.copy_file("{pjd}Source/{dem_n}".format(dem_n = dem_name, pjd = ProjDir), "{rt}Data/".format(rt = root))
+cj_function_lib.copy_file("{pjd}Source/{dem_n}".format(dem_n = dem_name, pjd = ProjDir), "{rt}Data/rasters/".format(rt = root))
 
 # # soil and land use
 soil_map_list = os.listdir("{pjd}Source/soil".format(pjd = ProjDir))
@@ -101,27 +103,27 @@ for lm_item in landuse_map_list:
         landuse_raster_name = lm_item
 
 if not dir_soil:
-    cj_function_lib.copy_file("{pjd}Source/soil/{so}".format(so = soil_raster_name, pjd = ProjDir), "{rt}Data/".format(rt = root))
+    cj_function_lib.copy_file("{pjd}Source/soil/{so}".format(so = soil_raster_name, pjd = ProjDir), "{rt}Data/rasters/".format(rt = root))
 else:
-    if not os.path.isdir("{rt}Data/{soil_dir}".format(soil_dir = soil_raster_name, rt = root)):
-        os.makedirs("{rt}Data/{soil_dir}".format(soil_dir = soil_raster_name, rt = root))
+    if not os.path.isdir("{rt}Data/rasters/{soil_dir}".format(soil_dir = soil_raster_name, rt = root)):
+        os.makedirs("{rt}Data/rasters/{soil_dir}".format(soil_dir = soil_raster_name, rt = root))
     s_copy_list = cj_function_lib.list_files_from("{pjd}Source/soil/{so}".format(so = soil_raster_name, pjd = ProjDir), "*")
     for s_c_item in s_copy_list:
-        cj_function_lib.copy_file(s_c_item, "{rt}Data/{soil_dir}".format(soil_dir = soil_raster_name, rt = root))
+        cj_function_lib.copy_file(s_c_item, "{rt}Data/rasters/{soil_dir}".format(soil_dir = soil_raster_name, rt = root))
 
 if not dir_landuse:
-    cj_function_lib.copy_file("{pjd}Source/crop/{so}".format(so = landuse_raster_name, pjd = ProjDir), "{rt}Data/".format(rt = root))
+    cj_function_lib.copy_file("{pjd}Source/crop/{so}".format(so = landuse_raster_name, pjd = ProjDir), "{rt}Data/rasters/".format(rt = root))
 else:
-    if not os.path.isdir("{rt}Data/{crop_dir}".format(crop_dir = landuse_raster_name, rt = root)):
-        os.makedirs("{rt}Data/{crop_dir}".format(crop_dir = landuse_raster_name, rt = root))
+    if not os.path.isdir("{rt}Data/rasters/{crop_dir}".format(crop_dir = landuse_raster_name, rt = root)):
+        os.makedirs("{rt}Data/rasters/{crop_dir}".format(crop_dir = landuse_raster_name, rt = root))
     l_copy_list = cj_function_lib.list_files_from("{pjd}Source/crop/{lu}".format(lu = landuse_raster_name, pjd = ProjDir), "*")
     for l_c_item in l_copy_list:
-        cj_function_lib.copy_file(l_c_item, "{rt}Data/{crop_dir}".format(crop_dir = landuse_raster_name, rt = root))
+        cj_function_lib.copy_file(l_c_item, "{rt}Data/rasters/{crop_dir}".format(crop_dir = landuse_raster_name, rt = root))
 
 # # get thresholds and options
 report("retrieving thresholds and model options")
 
-project_string_list = cj_function_lib.read_from("{dir}{fn}.qgs".format(dir = root, fn = ProjName))
+project_string_list = cj_function_lib.read_from("{dir}model/{fn}.qgs".format(dir = root, fn = ProjName))
 project_string = ""
 
 for pj_line in project_string_list:
@@ -146,7 +148,6 @@ soil_lookup = project_string.split('<soil>')[-1].split("</soil>")[0]
 soil_lookup = soil_lookup.split('<table type="QString">')[-1].split("</table>")[0]
 
 
-
 hru_creation_method = None
 target_value = None
 
@@ -165,46 +166,24 @@ elif (is_multiple == "1") and (is_dominant_hru == "0"):
 
 # check parameter files
 report("retrieving parameter file (model.in) if present")
+if not os.path.isdir("{rt}/Data/parameters/".format(rt = root)):
+    os.makedirs("{rt}/Data/parameters/".format(rt = root))
 
 if not os.path.isfile("{txt_dir}TxtInOut/model.in".format(txt_dir = DefaultSimDir)):
     calibration_file = ""
 else:
     calibration_file = "model.in"
-    cj_function_lib.copy_file("{txt_dir}TxtInOut/model.in".format(txt_dir = DefaultSimDir), "{rt}/Data/model.in".format(rt = root))
+    cj_function_lib.copy_file("{txt_dir}TxtInOut/model.in".format(txt_dir = DefaultSimDir), "{rt}/Data/parameters/model.in".format(rt = root))
 
 
 # replace values in project string
 
-namelist_string = namelist_string.replace("<NAME>", ProjName)
-namelist_string = namelist_string.replace("<DEM>", dem_name)
-namelist_string = namelist_string.replace("<SOIL>", soil_raster_name)
-namelist_string = namelist_string.replace("<LANDUSE>", landuse_raster_name)
-namelist_string = namelist_string.replace("<OUTLET>", "outlet.shp")
-namelist_string = namelist_string.replace("<WS_THRES_TYPE>", "1")
-namelist_string = namelist_string.replace("<WS_THRES_VAL>", "{thres}".format(thres = ws_threshold))
-namelist_string = namelist_string.replace("<OUT_SNAP>", "{thres}".format(thres = snap_threshold))
-
 if is_area == "0":
     is_area = 2
 
-namelist_string = namelist_string.replace("<BURN_IN_SHAPE>", "")
-namelist_string = namelist_string.replace("<SLOPE_CLASSES>", slope_classes)
-namelist_string = namelist_string.replace("<HRU_METHOD>", "{hru_m}".format(hru_m = hru_creation_method))
-namelist_string = namelist_string.replace("<HRU_THRES_TYPE>", "{is_a}".format(is_a = is_area))
-namelist_string = namelist_string.replace("<HRU_THRES_LU>", "{val_}".format(val_ = land_use_value))
-namelist_string = namelist_string.replace("<HRU_THRES_SOIL>", "{val_}".format(val_ = soil_value))
-namelist_string = namelist_string.replace("<HRU_THRES_SLOPE>", "{val_}".format(val_ = slope_value))
-namelist_string = namelist_string.replace("<HRU_TARGET>", "{val_}".format(val_ = target_value))
-
-namelist_string = namelist_string.replace("<SOIL_LOOKUP>", soil_lookup + ".csv")
-namelist_string = namelist_string.replace("<LANDUSE_LOOKUP>", land_use_lookup + ".csv")
-namelist_string = namelist_string.replace("<CAL_FILE>", calibration_file)
-namelist_string = namelist_string.replace("<USERSOIL>", "usersoil.csv")
-namelist_string = namelist_string.replace("<WGEN>", "WGEN_user.csv")
-
 # get database data
-pj_db = mdt.mdb_with_ops("{rt}{nm}/{nm}.mdb".format(rt = root, nm = ProjName))
-rf_db = mdt.mdb_with_ops("{rt}{nm}/QSWATRef2012.mdb".format(rt = root, nm = ProjName))
+pj_db = mdt.mdb_with_ops("{rt}model/{nm}/{nm}.mdb".format(rt = root, nm = ProjName))
+rf_db = mdt.mdb_with_ops("{rt}model/{nm}/QSWATRef2012.mdb".format(rt = root, nm = ProjName))
 
 pj_db.connect()
 rf_db.connect()
@@ -238,8 +217,7 @@ cj_function_lib.write_to("{rt}Data/tables/{fn}.csv".format(rt = root, fn = "user
 period = get_db_value(pj_db, "cio", "IYR", 1) + " - " + str(int(get_db_value(pj_db, "cio", "IYR", 1)) + int(get_db_value(pj_db, "cio", "NBYR", 1)) - 1)
 nyskip = get_db_value(pj_db, "cio", "NYSKIP", 1)
 
-namelist_string = namelist_string.replace("<MODEL_RUN_PERIOD>", period)
-namelist_string = namelist_string.replace("<WARM_UP>", nyskip)
+
 
 ipet = get_db_value(pj_db, "bsn", "IPET", 1)
 routing_method = get_db_value(pj_db, "bsn", "IRTE", 1)
@@ -265,11 +243,36 @@ elif int(ievent) == 3:
     runoff_method = 2
     routing_ts = 2
 
-namelist_string = namelist_string.replace("<ROUTING_METHOD>", "{val}".format(val = routing_method))
-namelist_string = namelist_string.replace("<ROUTING_TS>", "{val}".format(val = routing_ts))
-namelist_string = namelist_string.replace("<RAINFALL_TS>", "{val}".format(val = rainfall_ts))
-namelist_string = namelist_string.replace("<RUNOFF_METHOD>", "{val}".format(val = runoff_method))
-namelist_string = namelist_string.replace("<ET_METHOD>", "{val}".format(val = ipet + 1))
+namelist_string = namelist_string.format(
+    ROUTING_METHOD = routing_method,
+    ROUTING_TS = routing_ts,
+    RAINFALL_TS = rainfall_ts,
+    RUNOFF_METHOD = runoff_method,
+    ET_METHOD = ipet + 1,
+    NAME = ProjName,
+    DEM = dem_name,
+    SOIL = soil_raster_name,
+    LANDUSE = landuse_raster_name,
+    OUTLET = "outlet.shp",
+    WS_THRES_TYPE = "1",
+    WS_THRES_VAL = ws_threshold,
+    OUT_SNAP = snap_threshold,
+    BURN_IN_SHAPE = "" ,
+    SLOPE_CLASSES = slope_classes,
+    HRU_METHOD = hru_creation_method,
+    HRU_THRES_TYPE = is_area,
+    HRU_THRES_LU = land_use_value,
+    HRU_THRES_SOIL = soil_value,
+    HRU_THRES_SLOPE = slope_value,
+    HRU_TARGET = target_value,
+    SOIL_LOOKUP = soil_lookup + ".csv",
+    LANDUSE_LOOKUP = land_use_lookup + ".csv",
+    CAL_FILE = calibration_file,
+    USERSOIL = "usersoil.csv",
+    WGEN = "WGEN_user.csv",
+    MODEL_RUN_PERIOD = period,
+    WARM_UP = nyskip,
+    )
 
 pj_db.disconnect()
 rf_db.disconnect()
@@ -283,6 +286,7 @@ nl_path = "{rt}Data/old_namelists/namelist_{fn}.py".format(rt = root, fn = name_
 while os.path.isfile("{rt}Data/old_namelists/namelist_{fn}.py".format(rt = root, fn = name_list_id)):
     name_list_id += 1
     nl_path = "{rt}Data/old_namelists/namelist_{fn}.py".format(rt = root, fn = name_list_id)
+
 
 cj_function_lib.copy_file("{rt}namelist.py".format(rt = root), nl_path)
 
