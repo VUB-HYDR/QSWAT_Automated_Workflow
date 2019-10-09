@@ -4,9 +4,10 @@ Author: Celray James CHAWANDA, VUB
 import os,sys
 import cj_function_lib as cj
 import namelist
+import root_path
 
 path = os.path.dirname(cj.__file__)
-root = path.replace("workflow_lib", "")
+root = root_path.pth
 sys.path.append(root)
 import namelist
 

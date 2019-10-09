@@ -39,7 +39,7 @@ def get_distance(x1, y1, z1, x2, y2, z2, epsg_):
 #print variables.ProjMDB
 #print variables.QSWAT_MDB
 
-transform_epsg = int(cj.read_from("epsg_code.tmp~")[0])
+transform_epsg = int(cj.read_from(variables.path + "/epsg_code.tmp~")[0])
 
 subbasins = cj.extract_table_from_mdb(variables.ProjMDB, 'Watershed', variables.path + "\\watershed.tmp~")
 wgnrgn = cj.extract_table_from_mdb(variables.QSWAT_MDB, 'wgnrng', variables.path + "\\wgnrgn.tmp~")

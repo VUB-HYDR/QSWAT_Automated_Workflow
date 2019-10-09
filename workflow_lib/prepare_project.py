@@ -6,7 +6,9 @@ path = os.getcwd()
 root = path.replace("workflow_lib", "")#[0:-1]
 sys.path.insert(0, root)
 
-#root = root[0:-1]
+current_root = sys.argv[1] + "/model"
+cj.create_directory(current_root)
+
 import namelist
 
 def _removeNonAscii(s): return "".join(i for i in s if ord(i)<128)
@@ -23,74 +25,74 @@ print "_________________________________________________________________________
 project_name = namelist.Project_Name
 cj.create_directory(os.path.join(root, project_name))
 
-cj.create_directory(os.path.join(root, project_name, "Scenarios", "Default", "TablesIn"))
-cj.create_directory(os.path.join(root, project_name, "Scenarios", "Default", "TablesOut"))
-cj.create_directory(os.path.join(root, project_name, "Scenarios", "Default", "TxtInOut"))
-cj.create_directory(os.path.join(root, project_name, "Source", "crop"))
-cj.create_directory(os.path.join(root, project_name, "Source", "soil", "soilmap"))
-cj.create_directory(os.path.join(root, project_name, "Watershed", "Grid"))
-cj.create_directory(os.path.join(root, project_name, "Watershed", "Shapes"))
-cj.create_directory(os.path.join(root, project_name, "Watershed", "Tables"))
-cj.create_directory(os.path.join(root, project_name, "Watershed", "temp"))
-cj.create_directory(os.path.join(root, project_name, "Watershed", "Text"))
-cj.create_directory(os.path.join(root, project_name, "Weather"))
+cj.create_directory(os.path.join(current_root, project_name, "Scenarios", "Default", "TablesIn"))
+cj.create_directory(os.path.join(current_root, project_name, "Scenarios", "Default", "TablesOut"))
+cj.create_directory(os.path.join(current_root, project_name, "Scenarios", "Default", "TxtInOut"))
+cj.create_directory(os.path.join(current_root, project_name, "Source", "crop"))
+cj.create_directory(os.path.join(current_root, project_name, "Source", "soil", "soilmap"))
+cj.create_directory(os.path.join(current_root, project_name, "Watershed", "Grid"))
+cj.create_directory(os.path.join(current_root, project_name, "Watershed", "Shapes"))
+cj.create_directory(os.path.join(current_root, project_name, "Watershed", "Tables"))
+cj.create_directory(os.path.join(current_root, project_name, "Watershed", "temp"))
+cj.create_directory(os.path.join(current_root, project_name, "Watershed", "Text"))
+cj.create_directory(os.path.join(current_root, project_name, "Weather"))
 
 # Here we copy database files
 print "\t> Getting Databases..."
 
-cj.copy_file(root + "/workflow_lib/DefaultProject.mdb", root + "/" + project_name + "/" + project_name + ".mdb")
-cj.copy_file(root + "/workflow_lib/QSWATRef2012.mdb", root + "/" +  project_name + "/" + "QSWATRef2012.mdb")
+cj.copy_file(root + "/workflow_lib/DefaultProject.mdb", current_root + "/" + project_name + "/" + project_name + ".mdb")
+cj.copy_file(root + "/workflow_lib/QSWATRef2012.mdb", current_root + "/" +  project_name + "/" + "QSWATRef2012.mdb")
 
 # put placeholders
 print "\t> Extracting placeholders..."
 with zipfile.ZipFile(root + "/workflow_lib/placeholdingtiffs.zip","r") as zip_ref:
-    zip_ref.extractall(root + "/" + project_name + "/Source/")
+    zip_ref.extractall(current_root + "/" + project_name + "/Source/")
 with zipfile.ZipFile(root + "/workflow_lib/placeholdingshapes.zip","r") as zip_ref:
-    zip_ref.extractall(root + "/" + project_name + "/Watershed/Shapes/")
+    zip_ref.extractall(current_root + "/" + project_name + "/Watershed/Shapes/")
 
 print "\t> Getting tiff from dem\t\t\t: " + namelist.Topography
 # copy dem as tiff 
-cj.convert_raster(root + "/Data/" + namelist.Topography, root + "/" + project_name + "/Source/dem.tif")
+cj.convert_raster(sys.argv[1] + "/Data/rasters/" + namelist.Topography, current_root + "/" + project_name + "/Source/dem.tif")
 
 print "\t> Getting landuse and soil maps..."
-if os.path.isdir(os.path.join(root, "Data", namelist.Soils)):
-    cj.copytree(os.path.join(root, "Data", namelist.Soils), root + "/" + project_name + "/Source/soil/{0}/".format(namelist.Soils))
+if os.path.isdir(os.path.join(sys.argv[1], "Data/rasters/", namelist.Soils)):
+    cj.copytree(os.path.join(sys.argv[1], "Data/rasters/", namelist.Soils), current_root + "/" + project_name + "/Source/soil/{0}/".format(namelist.Soils))
 else:
-    cj.copy_file(os.path.join(root, "Data", namelist.Soils), os.path.join(root, project_name, "Source", "soil", namelist.Soils))
+    cj.copy_file(os.path.join(sys.argv[1], "Data/rasters/", namelist.Soils), os.path.join(current_root, project_name, "Source", "soil", namelist.Soils))
 
-if os.path.isdir(os.path.join(root, "Data", namelist.Land_Use)):
-    cj.copytree(os.path.join(root, "Data", namelist.Land_Use), os.path.join(root, project_name, "Source", "crop", namelist.Land_Use))
+if os.path.isdir(os.path.join(sys.argv[1], "Data/rasters/", namelist.Land_Use)):
+    cj.copytree(os.path.join(sys.argv[1], "Data/rasters/", namelist.Land_Use), os.path.join(current_root, project_name, "Source", "crop", namelist.Land_Use))
 else:
-    cj.copy_file(os.path.join(root, "Data", namelist.Land_Use), os.path.join(root, project_name, "Source", "crop", namelist.Land_Use))
+    cj.copy_file(os.path.join(sys.argv[1], "Data/rasters/", namelist.Land_Use), os.path.join(current_root, project_name, "Source", "crop", namelist.Land_Use))
 
 if not namelist.Burn_in_shape == "":
-    burn_in_shape = root + "/Data/shapes/" + namelist.Burn_in_shape
+    burn_in_shape = sys.argv[1] + "/Data/shapes/" + namelist.Burn_in_shape
     if os.path.isfile(burn_in_shape):
-        copyshape(burn_in_shape, namelist.Burn_in_shape[0:-4], root + "/" + project_name + "/Source/")
+        copyshape(burn_in_shape, namelist.Burn_in_shape[0:-4], current_root + "/" + project_name + "/Source/")
     else: 
         print("\t! Error: the specified burn-in file was not found, check that it exists and try again.")
 
 print "\t> Getting outlet shape file\t\t: {0}".format(namelist.Outlet)
-outletshapefile = os.path.join(root, "Data", "shapes", namelist.Outlet)
+outletshapefile = os.path.join(sys.argv[1], "Data", "shapes", namelist.Outlet)
 
 if os.path.isfile(outletshapefile):
-    copyshape(outletshapefile, "outlet", root + "/" + project_name + "/Watershed/Shapes/")
-    copyshape(outletshapefile, "outlet_sel", root + "/" + project_name + "/Watershed/Shapes/")
-    copyshape(outletshapefile, "outlet_sel_snap", root + "/" + project_name + "/Watershed/Shapes/")
+    copyshape(outletshapefile, "outlet", current_root + "/" + project_name + "/Watershed/Shapes/")
+    copyshape(outletshapefile, "outlet_sel", current_root + "/" + project_name + "/Watershed/Shapes/")
+    copyshape(outletshapefile, "outlet_sel_snap", current_root + "/" + project_name + "/Watershed/Shapes/")
 else: 
     print("\t! Error: either No outletshape file was specified, or it does not exist.")
 
-print("\t> Getting database tables \t\t: {0}".format(os.path.join(root, "Data", "tables")))
+print("\t> Getting database tables \t\t: {0}".format(os.path.join(sys.argv[1], "Data", "tables")))
 
 # Here we set lookup tables, usersoil and WGEN_user in the Ref and Project Databases
-soil_lu       = cj.read_from(os.path.join(root, "Data", "tables", namelist.soil_lookup))
-landuse_lu    = cj.read_from(os.path.join(root, "Data", "tables", namelist.landuse_lookup))
-WGEN_data     = cj.read_from(os.path.join(root, "Data", "tables", namelist.WGEN_user))
-usersoil_data = cj.read_from(os.path.join(root, "Data", "tables", namelist.Usersoil))
+soil_lu       = cj.read_from(os.path.join(sys.argv[1], "Data", "tables", namelist.soil_lookup))
+landuse_lu    = cj.read_from(os.path.join(sys.argv[1], "Data", "tables", namelist.landuse_lookup))
+WGEN_data     = cj.read_from(os.path.join(sys.argv[1], "Data", "tables", namelist.WGEN_user))
+usersoil_data = cj.read_from(os.path.join(sys.argv[1], "Data", "tables", namelist.Usersoil))
 
 print("\t> Configuring databasses \t\t: {0}.mdb & QSWATRef2012.mdb".format(project_name))
-prj_dbase = mdt.mdb_with_ops(os.path.join(root, project_name, project_name + ".mdb"))
-ref_dbase = mdt.mdb_with_ops(os.path.join(root, project_name, "QSWATRef2012.mdb"))
+prj_dbase = mdt.mdb_with_ops(os.path.join(current_root, project_name, project_name + ".mdb"))
+ref_dbase = mdt.mdb_with_ops(os.path.join(current_root, project_name, "QSWATRef2012.mdb"))
 
 # how to remove existing table if any?
 try:
@@ -170,14 +172,14 @@ ref_dbase.disconnect()
 prj_dbase.disconnect()
 
 # Get projection info for the project file
-proj4, is_proj = cj.get_proj4_from(root + "/" + project_name + "/Source/crop/" + namelist.Land_Use)
+proj4, is_proj = cj.get_proj4_from(current_root + "/" + project_name + "/Source/crop/" + namelist.Land_Use)
 
 if not is_proj:
     print("\t\t! Warning: makesure your land use map is projected.")
 
-xmin, ymax, xmax, ymin = cj.get_extents(root + "/" + project_name + "/Source/dem.tif")
-epsg_code, srs_id, prj_name = cj.get_auth(root + "/" + project_name + "/Source/dem.tif")
-soil_epsg_code, soil_srs_id, soil_prj_name = cj.get_auth(os.path.join(root, project_name, "Source", "crop", namelist.Land_Use))
+xmin, ymax, xmax, ymin = cj.get_extents(current_root + "/" + project_name + "/Source/dem.tif")
+epsg_code, srs_id, prj_name = cj.get_auth(current_root + "/" + project_name + "/Source/dem.tif")
+soil_epsg_code, soil_srs_id, soil_prj_name = cj.get_auth(os.path.join(current_root, project_name, "Source", "crop", namelist.Land_Use))
 
 cj.write_to("epsg_code.tmp~", "{0}".format(epsg_code))
 
@@ -224,14 +226,14 @@ if not namelist.Burn_in_shape == "":
     #new_pj_string = new_pj_string.replace('<burn type="QString"></burn>', '<burn type="QString">Source\\' + namelist.Burn_in_shape + '</burn>')
 
 new_pj_string = new_pj_string.replace('Landuses (Landuse)', 'Landuses (' + str(namelist.Land_Use.split(".")[0]) + ')')
-if os.path.isdir(root + "/" + project_name + "/Source/crop/" + namelist.Land_Use):
+if os.path.isdir(current_root + "/" + project_name + "/Source/crop/" + namelist.Land_Use):
     new_pj_string = new_pj_string.replace('crop/landuse/hdr.adf', 'crop/' + str(namelist.Land_Use) + '/hdr.adf')
     new_pj_string = new_pj_string.replace('crop\\landuse\\hdr.adf', 'crop\\' + str(namelist.Land_Use) + '\\hdr.adf')    
 else:
     new_pj_string = new_pj_string.replace('crop/landuse/hdr.adf', 'crop/' + str(namelist.Land_Use))        
     new_pj_string = new_pj_string.replace('crop\\landuse\\hdr.adf', 'crop\\' + str(namelist.Land_Use))        
 
-if os.path.isdir(root + "/" + project_name + "/Source/soil/" + namelist.Soils):
+if os.path.isdir(current_root + "/" + project_name + "/Source/soil/" + namelist.Soils):
     new_pj_string = new_pj_string.replace('soil/soilmap/hdr.adf', 'soil/' + str(namelist.Soils) + '/hdr.adf')
     new_pj_string = new_pj_string.replace('soil\\soilmap\\hdr.adf', 'soil\\' + str(namelist.Soils) + '\\hdr.adf')    
 else:
@@ -270,16 +272,16 @@ new_pj_string = new_pj_string.replace('EPSG:prj_authid', 'EPSG:' + epsg_code)
 new_pj_string = new_pj_string.replace('EPSG:soil_authid', 'EPSG:' + soil_epsg_code)
 new_pj_string = new_pj_string.replace('default_project_name', project_name)
 
-dem_stats = cj.get_raster_stats(root + "/" + project_name + "/Source/dem.tif")
+dem_stats = cj.get_raster_stats(current_root + "/" + project_name + "/Source/dem.tif")
 
 new_pj_string = new_pj_string.replace('<item alpha="255" value="376" label="376 - 1671" color="#0a640a"/>', '<item alpha="255" value="' + str(dem_stats['min']) + '" label="' + str(int(dem_stats['min'])) + ' - ' + str(int(((float(dem_stats['mean']) - float(dem_stats['min']))/2) + float(dem_stats['min']))) + '" color="#0a640a"/>')
 new_pj_string = new_pj_string.replace('<item alpha="255" value="2318" label="1671 - 2966" color="#997d19"/>', '<item alpha="255" value="' + str(dem_stats['mean']) + '" label="' + str(int(((float(dem_stats['mean']) - float(dem_stats['min']))/2) + float(dem_stats['min']))) + ' - ' + str(int(((float(dem_stats['max']) - float(dem_stats['mean']))/2) + float(dem_stats['mean']))) + '" color="#997d19"/>')
 new_pj_string = new_pj_string.replace('<item alpha="255" value="4261" label="2966 - 4261" color="#ffffff"/>', '<item alpha="255" value="' + str(dem_stats['max']) + '" label="' + str(int(((float(dem_stats['max']) - float(dem_stats['mean']))/2) + float(dem_stats['mean']))) + ' - ' + str(int(dem_stats['max'])) + '" color="#ffffff"/>')
 
-cj.write_to(root + "/" + project_name + ".qgs", new_pj_string)
+cj.write_to(current_root + "/" + project_name + ".qgs", new_pj_string)
 
 # Copying Weather Files
 print "\t> Getting Weather Data.."
-cj.copytree(root + "/Data/Weather/", root + "/" + project_name + "/Weather/")
+cj.copytree(sys.argv[1] + "/Data/Weather/", current_root + "/" + project_name + "/Weather/")
 
 print "\t> Finnished...\n____________________________________________________________________________"

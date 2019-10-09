@@ -4,18 +4,19 @@ This Module inserts parameters from a model.in file into the model
 import cj_function_lib as cj
 import mdbtools as mdb
 import namelist, zipfile, os, sys
-from init_file import root, DefaultSimDir
+from init_file import root, DefaultSimDir, path
 
 def main():
     if namelist.cal_file.strip(" ") != "":
         print("Applying user parameters...")
         back_up_files = cj.list_files_from("{0}TxtInOut/".format(DefaultSimDir), "")
-        if not os.path.isfile("{0}Data/{1}".format(root, namelist.cal_file)):
+        if not os.path.isfile("{0}Data/parameters/{1}".format(root.replace("model/",""), namelist.cal_file)):
+            # print("{0}Data/parameters/{1}".format(root.replace("model/",""), namelist.cal_file))
             print("no calibration file was found, make sure you have a 'model.in' file")
             return
-        cj.copy_file("{0}Data/{1}".format(root, namelist.cal_file), "{0}TxtInOut".format(DefaultSimDir))
+        cj.copy_file("{0}Data/parameters/{1}".format(root.replace("model/",""), namelist.cal_file), "{0}TxtInOut".format(DefaultSimDir))
 
-        with zipfile.ZipFile(root + "/workflow_lib/cal_holders.zip","r") as zip_ref:
+        with zipfile.ZipFile(path + "/cal_holders.zip","r") as zip_ref:
             zip_ref.extractall("{0}TxtInOut/".format(DefaultSimDir))
         if not os.path.isdir("{0}TxtInOut/Backup".format(DefaultSimDir)):
             os.makedirs("{0}TxtInOut/Backup".format(DefaultSimDir))
