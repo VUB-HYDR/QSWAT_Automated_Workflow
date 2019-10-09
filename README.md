@@ -18,12 +18,12 @@ Descriptions are included in the namelist.
 This repository includes the code for the wrapper presented in this paper. The wrapper runs in 32 bit version of python 2.7.
 
 ### 1. [run_QSWAT.bat](./run_QSWAT.bat) 
-This file is called when the command "runQSWAT.bat" is passed in command prompt or powershell
+This file is called when the command "runQSWAT" is passed in command prompt or powershell
 
 ### 2. [run_QSWAT.py](./run_QSWAT.py) 
 This file is used by [runQSWAT.bat](./runQSWAT.bat) to launch the model set up process
 
-### 3. [namelist.py](./namelist.py)
+### 3. [namelist.py](./test_data/namelist.py)
 This is the file where all settings for the configuration of the model are entered
 
 ### 4. [workflow_lib](./workflow_lib)
