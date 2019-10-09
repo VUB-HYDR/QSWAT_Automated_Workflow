@@ -17,7 +17,7 @@ Descriptions are included in the namelist.
 ## For users
 This repository includes the code for the wrapper presented in this paper. The wrapper runs in 32 bit version of python 2.7.
 
-### 1. [run_QSWAT.bat](./run_QSWAT.bat) 
+### 1. [runQSWAT.bat](./runQSWAT.bat) 
 This file is called when the command "runQSWAT" is passed in command prompt or powershell
 
 ### 2. [run_QSWAT.py](./run_QSWAT.py) 
